@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabase'
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { username, template, resumeUrl, data } = body
+    const { username, template, data } = body
 
     // Check if username already exists
     const { data: existingUser } = await supabase
@@ -26,7 +26,6 @@ export async function POST(request: NextRequest) {
       .insert({
         username,
         template,
-        resumeUrl,
         data,
       })
       .select()

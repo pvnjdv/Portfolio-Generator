@@ -60,17 +60,9 @@ export default function CreateForm({ isOpen, onClose }: CreateFormProps) {
     }
   }
 
-  const extractTextFromPDF = (file: File): Promise<string> => {
-    return new Promise((resolve) => {
-      const reader = new FileReader()
-      reader.onload = () => {
-        // This is a simplified version - in production, you'd use a proper PDF parser
-        const text = reader.result as string
-        // Extract readable text (this is a basic implementation)
-        resolve(text || 'Unable to extract text from PDF')
-      }
-      reader.readAsText(file)
-    })
+  const extractTextFromPDF = async (file: File): Promise<string> => {
+    const { parsePDF } = await import('../lib/pdfParser')
+    return await parsePDF(file)
   }
 
   const handleSubmit = async () => {
@@ -123,7 +115,6 @@ export default function CreateForm({ isOpen, onClose }: CreateFormProps) {
         body: JSON.stringify({
           username: formData.username,
           template: formData.template,
-          resumeUrl: '', // We'll implement file upload later
           data: portfolioData,
         }),
       })
