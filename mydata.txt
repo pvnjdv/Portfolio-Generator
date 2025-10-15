@@ -1,0 +1,46 @@
+ 
+Professional Summary
+AI & Cybersecurity enthusiast with 2+ years of experience across full-stack development and secure systems. Founder of Cybershield, leading peer engagement and cybersecurity initiatives at AISSMS IOIT. Skilled in Python, Flutter, Machine Learning, Docker, and CI/CD pipeline development. Certified in Ethical Hacking, Data Science, Python (PCEP & PCAP), and Google Analytics. Driven to solve real-world problems by integrating AI, automation, and secure cloud practices.
+
+Professional Experience
+Full Stack Developer– Kootumb multimedia Pvt Ltd | Pune, India | Jun 2025 – Present
+    • Working on development of multimedia platform Along with Also improving UI.
+    • Adding Some AI features Like AI quick call/msg Response. 
+CEO & Founder – Cybershield, AISSMS IOIT | Pune, India | Aug 2024 – Present
+    • Founded a student cybersecurity club, increasing productivity and engagement by 100%.
+    • Led workshops and fostered a collaborative learning environment.
+Data Science Intern – CodeClause Pvt Ltd | Pune, India | Jan 2024 – Mar 2024
+    • Developed predictive models and derived actionable insights from complex datasets.
+    • Collaborated with cross-functional teams on data-driven decision-making.
+Python Programming Intern – Codesoft | Remote | Nov 2023 – Dec 2023
+    • Built and optimized Python-based applications ensuring clean and efficient code.
+    • Participated in debugging, performance tuning, and peer code reviews.
+Cybersecurity Intern – Technohacks Edutech Pvt Ltd | Remote | Oct 2023 – Nov 2023
+    • Conducted security audits and vulnerability assessments to identify risks.
+    • Assisted in implementing updated security protocols.
+Security Guard (Part-time) – SevenSeas HR Services Pvt Ltd | Pune, India | Nov 2023 – Present
+    • Maintained building safety protocols and responded to emergency situations.
+
+Education
+B.Tech in Artificial Intelligence and Data Science
+AISSMS Institute of Information Technology, Pune | Pursuing (8.4)
+HSC & SSC – Jawahar Navodaya Vidyalaya, Dhule | Completed (72.2 & 84.5)
+Technical Skills
+Programming: Python, C, C++, SQL, Dart (Flutter), JavaScript.
+Frameworks: Flutter, React, TensorFlow, Scikit-learn.
+Tools: Jupyter NB, Git & GitHub, Microsoft Office, VS code, Android Studio etc.
+Cybersecurity: Ethical Hacking, Kali Linux and Tools, OWASP Top 10 threats, Penetration Testing.
+Data Science: Data Analysis & Visualization, Machine Learning, Google Analytics & Tableau, PowerBI.
+Artificial Intelligance: NLP, AI Model Deployment, Chatbot Development.
+DevOps & Cloud: Containerization with Docker, AWS basics.
+Soft Skills: Leadership, Teamwork, Adaptability, Time Management & Prioritization, Clear           Communication, Team Management.
+
+Certifications
+    • Cisco Python (PCEP & PCAP) – Cisco, 2025
+    • Certified Ethical Hacker – NSDC, 2023
+    • Google Analytics Certified – 2024
+    • Data Science – Programming Hub & Google, 2023
+    • C, C++ and Python Programming – Global Computer Institute, 2021
+    • 
+Ongoing Learning
+Proactively advancing expertise across all technical and soft skill areas including DevOps, Computer Networking, AI, and Cybersecurity. Deepening hands-on proficiency in cloud technologies, CI/CD pipelines, infrastructure automation, and network protocols. Regularly exploring new tools, frameworks, and methodologies to stay ahead of tech trends. Recognized for the ability to quickly absorb complex concepts and apply them in real-world projects. Committed to lifelong learning and continuous innovation.
