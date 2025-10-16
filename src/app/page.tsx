@@ -10,7 +10,7 @@ import { PortfolioData } from '@/lib/supabase'
 
 // Your personal portfolio data
 const personalPortfolioData: PortfolioData = {
-  name: "Pradyumna Vaidya", // Your actual name
+  name: "Pavan Jadhav", // Your actual name
   bio: "AI & Cybersecurity enthusiast with 2+ years of experience across full-stack development and secure systems. Founder of Cybershield, leading peer engagement and cybersecurity initiatives at AISSMS IOIT. Skilled in Python, Flutter, Machine Learning, Docker, and CI/CD pipeline development. Driven to solve real-world problems by integrating AI, automation, and secure cloud practices.",
   skills: [
     "Python", "C", "C++", "SQL", "Dart (Flutter)", "JavaScript", 

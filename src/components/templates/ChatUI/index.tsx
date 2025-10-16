@@ -394,7 +394,7 @@ export default function ChatUI({ data }: ChatUIProps) {
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900"></div>
       
       {/* Main content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4">
+  <div className="relative z-10 flex flex-col items-center justify-center min-h-[10vh] px-4 pt-2">
         
         {/* Header Section - Only show when no tab is active */}
         {!activeTab && (
@@ -402,33 +402,38 @@ export default function ChatUI({ data }: ChatUIProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-12 max-w-2xl"
+            className="flex flex-col items-center justify-start w-full max-w-2xl mx-auto"
           >
-            <p className="text-lg text-gray-400 mb-4">Hey Guys, I&apos;m {data.name}</p>
-            <h1 className="text-5xl md:text-6xl font-bold mb-8">
-              I cooked <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">PORTFOLIO</span>
-            </h1>
-            
+            <div className="mt-6 text-center w-full">
+              <p className="text-xl md:text-2xl font-semibold text-gray-800 mb-2">Hey Guys, I&apos;m {data.name}</p>
+              <h1 className="text-5xl md:text-5xl font-extrabold mb-2">
+                I cooked <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">HackyDaddy</span>
+              </h1>
+            </div>
             {/* Profile Image */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="w-64 h-64 mx-auto mb-8 mt-8 rounded-full overflow-hidden border-4 border-gray-600"
+          
             >
               <Image
-                src="/profile.jpg"
+                src="/profile.png"
                 alt={data.name}
-                width={256}
-                height={256}
-                className="w-full h-full object-cover"
+                width={200}
+                height={200}
+                className="w-full h-full object-cover object-center"
               />
             </motion.div>
+            {/* Input Bar */}
+            <div className="w-full flex justify-center">
+              {/* The input bar is rendered below in the main return, so just add spacing here */}
+            </div>
           </motion.div>
         )}
 
         {/* Dynamic Content Area */}
-        <div className="w-full mb-8 min-h-[400px] flex items-center justify-center">
+        <div className="w-full mb-8 min-h-[40px] flex items-center justify-center">
           <AnimatePresence mode="wait">
             {renderContent()}
           </AnimatePresence>
@@ -507,16 +512,12 @@ export default function ChatUI({ data }: ChatUIProps) {
         )}
 
         {/* Chat Input */}
-        <div className="w-full max-w-2xl mx-auto px-4 mb-8">
+  <div className="w-full max-w-xl mx-auto  mb-8 mt-2">
           <AiInput 
             onSubmit={(message) => {
               if (message.trim()) {
                 handleChatMessage(message)
               }
-            }}
-            placeholder={{
-              search: "Search portfolio info...",
-              ask: `Ask about ${data.name}...`
             }}
           />
         </div>
@@ -536,7 +537,7 @@ export default function ChatUI({ data }: ChatUIProps) {
               <button
                 key={item.name}
                 onClick={() => setActiveTab(activeTab === item.name ? null : item.name)}
-                className={`relative flex flex-col items-center px-6 py-3 rounded-xl transition-all duration-300 ${
+                className={`relative flex flex-col items-center px-6 py-1 rounded-xl transition-all duration-300 ${
                   isActive
                     ? 'bg-blue-600 text-white'
                     : 'text-gray-400 hover:text-white hover:bg-gray-800'

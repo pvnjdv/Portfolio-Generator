@@ -58,7 +58,7 @@ export async function parseResumeWithAI(resumeText: string) {
           content: resumeText
         }
       ],
-      model: 'mixtral-8x7b-32768',
+    model: 'openai/gpt-oss-20b',
       temperature: 0.1,
     })
 
@@ -69,8 +69,12 @@ export async function parseResumeWithAI(resumeText: string) {
 
     return JSON.parse(result)
   } catch (error) {
-    console.error('Error parsing resume with AI:', error)
-    throw error
+      if (error?.message?.includes('model_decommissioned')) {
+        console.error('Error: The selected Groq model has been decommissioned. Please update to a supported model.');
+      } else {
+        console.error('Error parsing resume with AI:', error);
+      }
+      throw error;
   }
 }
 
