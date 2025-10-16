@@ -68,13 +68,22 @@ export async function parseResumeWithAI(resumeText: string) {
     }
 
     return JSON.parse(result)
-  } catch (error) {
-      if (error?.message?.includes('model_decommissioned')) {
+  } catch (error: unknown) {
+    if (
+      typeof error === 'object' &&
+      error !== null &&
+      'message' in error &&
+      typeof (error as { message: string }).message === 'string'
+    ) {
+      if ((error as { message: string }).message.includes('model_decommissioned')) {
         console.error('Error: The selected Groq model has been decommissioned. Please update to a supported model.');
       } else {
         console.error('Error parsing resume with AI:', error);
       }
-      throw error;
+    } else {
+      console.error('Error parsing resume with AI:', error);
+    }
+    throw error;
   }
 }
 
