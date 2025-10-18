@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { UserCircle, Code, Briefcase, Mail, Star, Github, ExternalLink, MapPin, Phone, User, Bot } from 'lucide-react'
+import { UserCircle, Code, Briefcase, Mail, Star, Github, ExternalLink, MapPin, Phone } from 'lucide-react'
 import { PortfolioData } from '@/lib/supabase'
 import { AIInput } from '@/components/ui/AIInput'
 import { GlassButton } from '@/components/ui/button'
@@ -10,13 +10,6 @@ import Image from 'next/image'
 
 interface ChatUIProps {
   data: PortfolioData
-}
-
-interface Message {
-  id: string
-  type: 'user' | 'bot'
-  content: string
-  timestamp: Date
 }
 
 const navItems = [
@@ -150,20 +143,42 @@ const AboutMeContent = ({ data }: { data: PortfolioData }) => (
 )
 
 // Projects Component
-const ProjectsContent = ({ data }: { data: PortfolioData }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -20 }}
-    className="max-w-7xl mx-auto px-6"
-  >
-    <motion.h2 
-      initial={{ opacity: 0, y: -20 }}
+const ProjectsContent = ({ data }: { data: PortfolioData }) => {
+  if (data.projects.length === 0) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        className="max-w-7xl mx-auto px-6 text-center"
+      >
+        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12 border border-blue-200/50">
+          <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+            <Star className="w-10 h-10 text-white" />
+          </div>
+          <h3 className="text-2xl font-bold text-gray-800 mb-4">Amazing Projects Coming Soon!</h3>
+          <p className="text-gray-600 text-lg">
+            Featured projects and innovations will be showcased here once available. Stay tuned!
+          </p>
+        </div>
+      </motion.div>
+    )
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="text-4xl font-bold mb-16 text-center bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent"
+      exit={{ opacity: 0, y: -20 }}
+      className="max-w-7xl mx-auto px-6"
     >
-      Featured Projects & Innovation
-    </motion.h2>
+      <motion.h2 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-4xl font-bold mb-16 text-center bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent"
+      >
+        Featured Projects & Innovation
+      </motion.h2>
     
     <div className="grid lg:grid-cols-2 gap-8">
       {data.projects.map((project, index) => (
@@ -311,36 +326,73 @@ const ProjectsContent = ({ data }: { data: PortfolioData }) => (
       </div>
     </motion.div>
   </motion.div>
-)
+)}
 
 // Skills Component
 const SkillsContent = ({ data }: { data: PortfolioData }) => {
-  const skillCategories = [
-    {
-      title: "Programming Languages",
-      skills: ["Python", "C", "C++", "JavaScript", "SQL", "Dart (Flutter)"],
-      color: "blue",
-      icon: "💻"
-    },
-    {
-      title: "Frameworks & Libraries", 
-      skills: ["React", "TensorFlow", "Scikit-learn", "Flask", "Node.js"],
-      color: "purple",
-      icon: "🚀"
-    },
-    {
-      title: "Cloud & DevOps",
-      skills: ["Docker", "AWS", "Git & GitHub", "CI/CD"],
-      color: "cyan",
-      icon: "☁️"
-    },
-    {
-      title: "Cybersecurity & AI",
-      skills: ["Ethical Hacking", "Kali Linux", "OWASP", "Machine Learning", "NLP", "Penetration Testing"],
-      color: "green",
-      icon: "🔒"
+  // Categorize skills based on common patterns
+  const categorizeSkills = (skills: string[]) => {
+    const programmingLangs = ['python', 'javascript', 'typescript', 'java', 'c++', 'c#', 'c', 'php', 'ruby', 'go', 'rust', 'swift', 'kotlin', 'dart', 'scala', 'r', 'matlab', 'sql', 'html', 'css']
+    const frameworks = ['react', 'angular', 'vue', 'node.js', 'express', 'django', 'flask', 'spring', 'laravel', 'rails', 'flutter', 'react native', 'tensorflow', 'pytorch', 'scikit-learn', 'pandas', 'numpy']
+    const cloudDevOps = ['aws', 'azure', 'gcp', 'docker', 'kubernetes', 'jenkins', 'git', 'github', 'gitlab', 'ci/cd', 'terraform', 'ansible', 'nginx', 'apache']
+    const security = ['cybersecurity', 'ethical hacking', 'penetration testing', 'owasp', 'kali linux', 'metasploit', 'wireshark', 'burp suite', 'nmap', 'security']
+
+    const categories = {
+      "Programming Languages": skills.filter(skill => 
+        programmingLangs.some(lang => skill.toLowerCase().includes(lang))
+      ),
+      "Frameworks & Libraries": skills.filter(skill => 
+        frameworks.some(fw => skill.toLowerCase().includes(fw))
+      ),
+      "Cloud & DevOps": skills.filter(skill => 
+        cloudDevOps.some(cloud => skill.toLowerCase().includes(cloud))
+      ),
+      "Security & Testing": skills.filter(skill => 
+        security.some(sec => skill.toLowerCase().includes(sec))
+      ),
+      "Other Skills": skills.filter(skill => {
+        const lowerSkill = skill.toLowerCase()
+        return !programmingLangs.some(lang => lowerSkill.includes(lang)) &&
+               !frameworks.some(fw => lowerSkill.includes(fw)) &&
+               !cloudDevOps.some(cloud => lowerSkill.includes(cloud)) &&
+               !security.some(sec => lowerSkill.includes(sec))
+      })
     }
-  ]
+
+    return Object.entries(categories)
+      .filter(([, skills]) => skills.length > 0)
+      .map(([title, skills], index) => ({
+        title,
+        skills,
+        color: ["blue", "purple", "cyan", "green", "orange"][index % 5],
+        icon: ["💻", "🚀", "☁️", "🔒", "⚡"][index % 5]
+      }))
+  }
+
+  const skillCategories = data.skills.length > 0 
+    ? categorizeSkills(data.skills)
+    : []
+
+  if (skillCategories.length === 0) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        className="max-w-6xl mx-auto px-6 text-center"
+      >
+        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12 border border-blue-200/50">
+          <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+            <Code className="w-10 h-10 text-white" />
+          </div>
+          <h3 className="text-2xl font-bold text-gray-800 mb-4">Skills Coming Soon!</h3>
+          <p className="text-gray-600 text-lg">
+            Technical skills and expertise will be showcased here once available. Stay tuned!
+          </p>
+        </div>
+      </motion.div>
+    )
+  }
 
   return (
     <motion.div
@@ -479,6 +531,27 @@ const ExperienceContent = ({ data }: { data: PortfolioData }) => {
     const yearB = parseInt(b.duration.split(' - ')[0]) || 0
     return yearB - yearA
   })
+
+  if (allItems.length === 0) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        className="max-w-7xl mx-auto px-6 py-8 text-center"
+      >
+        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12 border border-blue-200/50">
+          <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+            <Briefcase className="w-10 h-10 text-white" />
+          </div>
+          <h3 className="text-2xl font-bold text-gray-800 mb-4">Professional Journey Coming Soon!</h3>
+          <p className="text-gray-600 text-lg">
+            Experience and education details will be showcased here once available. Stay tuned!
+          </p>
+        </div>
+      </motion.div>
+    )
+  }
 
   return (
     <motion.div
@@ -657,34 +730,73 @@ const ExperienceContent = ({ data }: { data: PortfolioData }) => {
 // Contact Component
 const ContactContent = ({ data }: { data: PortfolioData }) => {
   const contactMethods = [
-    {
+    ...(data.contact.email ? [{
       icon: Mail,
       label: "Email",
-      value: "pavan.jadhav@example.com",
-      href: "mailto:pavan.jadhav@example.com",
+      value: data.contact.email,
+      href: `mailto:${data.contact.email}`,
       color: "blue",
       description: "Drop me a line anytime",
       gradient: "from-blue-500 to-blue-600"
-    },
-    {
+    }] : []),
+    ...(data.contact.github ? [{
       icon: Github,
       label: "GitHub",
-      value: "@pvnjdv",
-      href: "https://github.com/pvnjdv",
+      value: data.contact.github.includes('@') ? data.contact.github : `@${data.contact.github}`,
+      href: data.contact.github.startsWith('http') ? data.contact.github : `https://github.com/${data.contact.github.replace('@', '')}`,
       color: "purple",
       description: "Check out my repositories",
       gradient: "from-purple-500 to-purple-600"
-    },
-    {
+    }] : []),
+    ...(data.contact.linkedin ? [{
       icon: Phone,
       label: "LinkedIn",
       value: "Connect with me",
-      href: "https://linkedin.com/in/pvnjdv",
+      href: data.contact.linkedin.startsWith('http') ? data.contact.linkedin : `https://linkedin.com/in/${data.contact.linkedin}`,
       color: "cyan",
       description: "Professional networking",
       gradient: "from-cyan-500 to-cyan-600"
-    }
+    }] : []),
+    ...(data.contact.phone ? [{
+      icon: Phone,
+      label: "Phone",
+      value: data.contact.phone,
+      href: `tel:${data.contact.phone}`,
+      color: "green",
+      description: "Give me a call",
+      gradient: "from-green-500 to-green-600"
+    }] : []),
+    ...(data.contact.website ? [{
+      icon: ExternalLink,
+      label: "Website",
+      value: "Visit my website",
+      href: data.contact.website.startsWith('http') ? data.contact.website : `https://${data.contact.website}`,
+      color: "orange",
+      description: "Explore my online presence",
+      gradient: "from-orange-500 to-orange-600"
+    }] : [])
   ]
+
+  if (contactMethods.length === 0) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        className="max-w-7xl mx-auto px-6 py-8 text-center"
+      >
+        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12 border border-blue-200/50">
+          <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+            <Mail className="w-10 h-10 text-white" />
+          </div>
+          <h3 className="text-2xl font-bold text-gray-800 mb-4">Contact Information Coming Soon!</h3>
+          <p className="text-gray-600 text-lg">
+            Contact details will be available here once provided. Stay tuned for updates!
+          </p>
+        </div>
+      </motion.div>
+    )
+  }
 
   return (
     <motion.div
@@ -1060,7 +1172,7 @@ export default function ChatUI({ data }: ChatUIProps) {
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900"></div>
       
       {/* Main content */}
-  <div className="relative z-10 flex flex-col items-center justify-center min-h-[10vh] px-4 pt-2">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-[10vh] px-4 pt-2">
         
         {/* Header Section - Only show when no tab is active */}
         {!activeTab && (
@@ -1107,7 +1219,6 @@ export default function ChatUI({ data }: ChatUIProps) {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-          
             >
               <Image
                 src="/profile.png"
@@ -1117,10 +1228,6 @@ export default function ChatUI({ data }: ChatUIProps) {
                 className="w-full h-full object-cover object-center"
               />
             </motion.div>
-            {/* Input Bar */}
-            <div className="w-full flex justify-center">
-              {/* The input bar is rendered below in the main return, so just add spacing here */}
-            </div>
           </motion.div>
         )}
 
@@ -1141,7 +1248,7 @@ export default function ChatUI({ data }: ChatUIProps) {
                 className="mb-6"
               >
                 <p className="text-gray-400 text-sm mb-2">
-                  Search results for: <span className="text-white font-medium">"{currentQuery}"</span>
+                  Search results for: <span className="text-white font-medium">&quot;{currentQuery}&quot;</span>
                 </p>
                 <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent"></div>
               </motion.div>
@@ -1235,7 +1342,7 @@ export default function ChatUI({ data }: ChatUIProps) {
                 transition={{ delay: 0.9 + index * 0.1 }}
               >
                 <GlassButton
-                  variant={item.variant as any}
+                  variant={item.variant as "primary" | "secondary" | "success" | "warning" | "danger"}
                   size="sm"
                   isActive={isActive}
                   onClick={() => setActiveTab(activeTab === item.name ? null : item.name)}

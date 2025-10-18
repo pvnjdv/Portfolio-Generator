@@ -56,7 +56,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = "Button"
 
 // Modern Glass Button
-export interface GlassButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onDrag'> {
+export interface GlassButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onDrag' | 'onDragEnd' | 'onDragStart' | 'onAnimationStart'> {
   children: React.ReactNode
   variant?: "primary" | "secondary" | "success" | "warning" | "danger"
   size?: "sm" | "md" | "lg"
@@ -100,7 +100,7 @@ const GlassButton = React.forwardRef<HTMLButtonElement, GlassButtonProps>(
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={onClick}
-        {...(props as any)}
+        {...props}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
         <span className="relative z-10 font-medium">{children}</span>
@@ -111,7 +111,7 @@ const GlassButton = React.forwardRef<HTMLButtonElement, GlassButtonProps>(
 GlassButton.displayName = "GlassButton"
 
 // Neon Button
-export interface NeonButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onDrag' | 'onDragEnd' | 'onDragStart'> {
+export interface NeonButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onDrag' | 'onDragEnd' | 'onDragStart' | 'onAnimationStart'> {
   children: React.ReactNode
   color?: "blue" | "purple" | "green" | "pink" | "cyan"
   size?: "sm" | "md" | "lg"
@@ -155,7 +155,7 @@ const NeonButton = React.forwardRef<HTMLButtonElement, NeonButtonProps>(
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         onClick={onClick}
-        {...(props as any)}
+        {...props}
       >
         <div className={cn(
           "absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300",

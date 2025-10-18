@@ -70,39 +70,96 @@ export default function CreateForm({ isOpen, onClose }: CreateFormProps) {
 
     setLoading(true)
     try {
+      // Enhanced fallback data with more realistic defaults
       let portfolioData = {
-        name: formData.username,
-        bio: 'Professional developer with passion for creating innovative solutions.',
-        skills: ['JavaScript', 'React', 'Node.js', 'Python'],
-        projects: [],
-        experience: [],
-        education: [],
+        name: formData.username || 'Portfolio Creator',
+        bio: 'Passionate professional dedicated to creating innovative solutions and building impactful projects. Experienced in modern technologies and committed to continuous learning and growth.',
+        skills: [
+          'JavaScript', 'React', 'Node.js', 'Python', 'HTML', 'CSS', 
+          'Git', 'Problem Solving', 'Team Collaboration', 'Agile Development'
+        ],
+        projects: [
+          {
+            id: '1',
+            title: 'Personal Portfolio Website',
+            description: 'A modern, responsive portfolio website built with cutting-edge technologies to showcase professional work and skills.',
+            technologies: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
+            projectUrl: '',
+            githubUrl: ''
+          }
+        ],
+        experience: [
+          {
+            id: '1',
+            company: 'Freelance / Personal Projects',
+            position: 'Developer',
+            duration: 'Present',
+            description: 'Working on various personal and professional projects to develop skills and create innovative solutions.'
+          }
+        ],
+        education: [
+          {
+            id: '1',
+            institution: 'Learning Institution',
+            degree: 'Computer Science / Related Field',
+            duration: 'In Progress',
+            description: 'Pursuing education in technology and computer science with focus on practical application and project development.'
+          }
+        ],
         contact: {
           email: '',
+          phone: '',
           github: '',
-          linkedin: ''
+          linkedin: '',
+          website: '',
+          location: ''
         }
       }
 
       // If AI enhancement is enabled and we have a resume, parse it
       if (formData.enhanceWithAI && formData.resumeFile) {
         try {
+          // Show progress to user by updating loading state
           const resumeText = await extractTextFromPDF(formData.resumeFile)
           
-          const response = await fetch('/api/parseResume', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ resumeText }),
-          })
+          if (resumeText.trim().length > 100) { // Ensure we have substantial content
+            const response = await fetch('/api/parseResume', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ resumeText }),
+            })
 
-          if (response.ok) {
-            const { data } = await response.json()
-            portfolioData = { ...portfolioData, ...data }
+            if (response.ok) {
+              const { data } = await response.json()
+              
+              // Merge AI-parsed data with fallback data, prioritizing AI data
+              portfolioData = {
+                name: data.name || portfolioData.name,
+                bio: data.bio || portfolioData.bio,
+                skills: data.skills && data.skills.length > 0 ? data.skills : portfolioData.skills,
+                projects: data.projects && data.projects.length > 0 ? data.projects : portfolioData.projects,
+                experience: data.experience && data.experience.length > 0 ? data.experience : portfolioData.experience,
+                education: data.education && data.education.length > 0 ? data.education : portfolioData.education,
+                contact: {
+                  email: data.contact?.email || portfolioData.contact.email,
+                  phone: data.contact?.phone || portfolioData.contact.phone,
+                  github: data.contact?.github || portfolioData.contact.github,
+                  linkedin: data.contact?.linkedin || portfolioData.contact.linkedin,
+                  website: data.contact?.website || portfolioData.contact.website,
+                  location: data.contact?.location || portfolioData.contact.location,
+                }
+              }
+            } else {
+              console.warn('AI parsing service unavailable, using fallback data')
+            }
+          } else {
+            console.warn('Resume content too short for AI parsing, using fallback data')
           }
         } catch (error) {
-          console.error('AI parsing failed, using basic data:', error)
+          console.error('AI parsing failed, using fallback data:', error)
+          // Continue with fallback data - no need to throw error
         }
       }
 
@@ -184,13 +241,13 @@ export default function CreateForm({ isOpen, onClose }: CreateFormProps) {
                 value={formData.username}
                 onChange={(e) => handleInputChange('username', e.target.value)}
                 placeholder="your-awesome-username"
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black ${
                   errors.username ? 'border-red-500' : 'border-gray-300'
                 }`}
               />
               {errors.username && <p className="text-red-500 text-sm mt-1">{errors.username}</p>}
               <p className="text-gray-500 text-sm mt-1">
-                Your portfolio will be available at: portfolio.hackydaddy.xyz/{formData.username || 'username'}
+                Your portfolio will be available at: <span className="font-mono text-blue-600">portfolio.hackydaddy.xyz/{formData.username || 'username'}</span>
               </p>
             </div>
 
@@ -225,18 +282,24 @@ export default function CreateForm({ isOpen, onClose }: CreateFormProps) {
               {errors.resumeFile && <p className="text-red-500 text-sm mt-1">{errors.resumeFile}</p>}
             </div>
 
-            <div className="flex items-center space-x-3">
-              <input
-                type="checkbox"
-                id="enhance-ai"
-                checked={formData.enhanceWithAI}
-                onChange={(e) => handleInputChange('enhanceWithAI', e.target.checked)}
-                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-              />
-              <label htmlFor="enhance-ai" className="text-sm text-gray-700 flex items-center">
-                <Sparkles className="w-4 h-4 mr-1 text-purple-500" />
-                Enhance with AI (parse resume automatically)
-              </label>
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <div className="flex items-center space-x-3 mb-2">
+                <input
+                  type="checkbox"
+                  id="enhance-ai"
+                  checked={formData.enhanceWithAI}
+                  onChange={(e) => handleInputChange('enhanceWithAI', e.target.checked)}
+                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                />
+                <label htmlFor="enhance-ai" className="text-sm font-medium text-gray-700 flex items-center">
+                  <Sparkles className="w-4 h-4 mr-1 text-purple-500" />
+                  Enhance with AI (Recommended)
+                </label>
+              </div>
+              <p className="text-xs text-gray-600 ml-7">
+                AI will automatically extract your name, bio, skills, experience, education, and contact information from your resume. 
+                If parsing fails, we&apos;ll use smart fallback data to ensure your portfolio is ready to customize.
+              </p>
             </div>
 
             <button

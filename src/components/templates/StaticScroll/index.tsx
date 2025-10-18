@@ -94,23 +94,31 @@ export default function StaticScroll({ data }: StaticScrollProps) {
             </div>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {data.skills.map((skill, index) => (
-              <div
-                key={skill}
-                className="group relative px-6 py-4 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 border border-gray-100"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full group-hover:scale-125 transition-transform duration-300" />
-                  <span className="text-sm font-medium text-gray-700 group-hover:text-gray-900 transition-colors">
-                    {skill}
-                  </span>
+          {data.skills.length > 0 ? (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {data.skills.map((skill, index) => (
+                <div
+                  key={skill}
+                  className="group relative px-6 py-4 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full group-hover:scale-125 transition-transform duration-300" />
+                    <span className="text-sm font-medium text-gray-700 group-hover:text-gray-900 transition-colors">
+                      {skill}
+                    </span>
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-purple-50/50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-purple-50/50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="bg-white rounded-2xl p-12 text-center shadow-sm border border-gray-100">
+              <Code className="w-16 h-16 text-blue-400 mx-auto mb-6" />
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Skills Portfolio Coming Soon</h3>
+              <p className="text-gray-600">Technical skills and expertise will be showcased here soon.</p>
+            </div>
+          )}
         </section>
 
         {/* Experience Section with enhanced design */}
@@ -127,7 +135,7 @@ export default function StaticScroll({ data }: StaticScrollProps) {
             </div>
             
             <div className="space-y-8">
-              {data.experience.map((exp, index) => (
+              {data.experience.map((exp) => (
                 <div key={exp.id} className="group relative">
                   {/* Timeline line */}
                   <div className="absolute left-6 top-16 bottom-0 w-0.5 bg-gradient-to-b from-green-200 to-transparent group-last:hidden" />
@@ -245,7 +253,7 @@ export default function StaticScroll({ data }: StaticScrollProps) {
             </div>
             
             <div className="space-y-6">
-              {data.education.map((edu, index) => (
+              {data.education.map((edu) => (
                 <div key={edu.id} className="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-3">
                     <div>
@@ -279,7 +287,7 @@ export default function StaticScroll({ data }: StaticScrollProps) {
                 Get In Touch
               </h2>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
-                Interested in working together? I'd love to hear from you. Let's discuss your next project and bring your ideas to life.
+                Interested in working together? I&apos;d love to hear from you. Let&apos;s discuss your next project and bring your ideas to life.
               </p>
             </div>
             

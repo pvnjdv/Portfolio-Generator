@@ -80,7 +80,7 @@ export function NavBar({ items, className, activeTab, onTabClick }: NavBarProps)
                 >
                   {buttonType === "glass" ? (
                     <GlassButton
-                      variant={buttonVariants.glass[item.name as keyof typeof buttonVariants.glass] as any}
+                      variant={buttonVariants.glass[item.name as keyof typeof buttonVariants.glass] as "primary" | "secondary" | "success" | "warning" | "danger"}
                       size="sm"
                       isActive={isActive}
                       onClick={handleClick}
@@ -112,7 +112,7 @@ export function NavBar({ items, className, activeTab, onTabClick }: NavBarProps)
                     </GlassButton>
                   ) : (
                     <NeonButton
-                      color={buttonVariants.neon[item.name as keyof typeof buttonVariants.neon] as any}
+                      color={buttonVariants.neon[item.name as keyof typeof buttonVariants.neon] as "blue" | "purple" | "green" | "pink" | "cyan"}
                       size="sm"
                       isActive={isActive}
                       onClick={handleClick}
