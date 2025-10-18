@@ -26,9 +26,9 @@ const AboutMeContent = ({ data }: { data: PortfolioData }) => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
-    className="max-w-6xl mx-auto px-6"
+    className="w-full px-6 flex items-center justify-center min-h-[60vh]"
   >
-    <div className="relative">
+    <div className="relative max-w-4xl mx-auto">
       {/* Background glow effects */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-cyan-600/10 rounded-3xl blur-2xl"></div>
       <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-600/20 rounded-3xl blur-3xl opacity-30"></div>
@@ -150,9 +150,9 @@ const ProjectsContent = ({ data }: { data: PortfolioData }) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
-        className="max-w-7xl mx-auto px-6 text-center"
+        className="w-full px-6 text-center"
       >
-        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12 border border-blue-200/50">
+        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12 border border-blue-200/50 max-w-4xl mx-auto">
           <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center">
             <Star className="w-10 h-10 text-white" />
           </div>
@@ -170,7 +170,7 @@ const ProjectsContent = ({ data }: { data: PortfolioData }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="max-w-7xl mx-auto px-6"
+      className="w-full px-6"
     >
       <motion.h2 
         initial={{ opacity: 0, y: -20 }}
@@ -379,9 +379,9 @@ const SkillsContent = ({ data }: { data: PortfolioData }) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
-        className="max-w-6xl mx-auto px-6 text-center"
+        className="w-full px-6 text-center"
       >
-        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12 border border-blue-200/50">
+        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12 border border-blue-200/50 max-w-4xl mx-auto">
           <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center">
             <Code className="w-10 h-10 text-white" />
           </div>
@@ -399,82 +399,70 @@ const SkillsContent = ({ data }: { data: PortfolioData }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="max-w-6xl mx-auto px-6"
+      className="w-full px-6"
     >
       <motion.h2 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent"
+        className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent"
       >
         Technical Skills & Expertise
       </motion.h2>
       
-      <div className="grid lg:grid-cols-2 gap-8">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
         {skillCategories.map((category, categoryIndex) => (
           <motion.div
             key={category.title}
-            initial={{ opacity: 0, x: categoryIndex % 2 === 0 ? -50 : 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: categoryIndex * 0.2 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: categoryIndex * 0.1 }}
             className="relative group"
           >
-            {/* Background glow */}
-            <div className={`absolute inset-0 rounded-2xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity ${
-              category.color === 'blue' ? 'bg-gradient-to-br from-blue-500 to-blue-600' :
-              category.color === 'purple' ? 'bg-gradient-to-br from-purple-500 to-purple-600' :
-              category.color === 'cyan' ? 'bg-gradient-to-br from-cyan-500 to-cyan-600' :
-              'bg-gradient-to-br from-green-500 to-green-600'
-            }`}></div>
-            
-            <div className={`relative bg-gray-900/80 backdrop-blur-xl rounded-2xl p-6 border transition-all duration-300 group-hover:scale-[1.02] ${
+            <div className={`relative bg-gray-900/80 backdrop-blur-xl rounded-xl p-4 border transition-all duration-300 hover:scale-105 ${
               category.color === 'blue' ? 'border-blue-500/30 hover:border-blue-400/50' :
               category.color === 'purple' ? 'border-purple-500/30 hover:border-purple-400/50' :
               category.color === 'cyan' ? 'border-cyan-500/30 hover:border-cyan-400/50' :
-              'border-green-500/30 hover:border-green-400/50'
+              category.color === 'green' ? 'border-green-500/30 hover:border-green-400/50' :
+              'border-orange-500/30 hover:border-orange-400/50'
             }`}>
               {/* Header */}
-              <div className="flex items-center mb-6">
-                <span className="text-2xl mr-3">{category.icon}</span>
-                <h3 className={`text-xl font-bold ${
+              <div className="flex items-center mb-3">
+                <span className="text-lg mr-2">{category.icon}</span>
+                <h3 className={`text-sm font-bold ${
                   category.color === 'blue' ? 'text-blue-400' :
                   category.color === 'purple' ? 'text-purple-400' :
                   category.color === 'cyan' ? 'text-cyan-400' :
-                  'text-green-400'
+                  category.color === 'green' ? 'text-green-400' :
+                  'text-orange-400'
                 }`}>
                   {category.title}
                 </h3>
               </div>
               
-              {/* Skills Grid */}
-              <div className="grid grid-cols-2 gap-3">
-                {category.skills.map((skill, skillIndex) => (
+              {/* Skills List */}
+              <div className="space-y-2">
+                {category.skills.slice(0, 6).map((skill, skillIndex) => (
                   <motion.div
                     key={skill}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ 
-                      delay: (categoryIndex * 0.2) + (skillIndex * 0.05) + 0.3 
-                    }}
-                    className={`group/skill relative p-3 rounded-lg border transition-all duration-300 hover:scale-105 cursor-default ${
-                      category.color === 'blue' ? 'bg-blue-500/10 border-blue-500/20 hover:border-blue-400/40 hover:bg-blue-500/20' :
-                      category.color === 'purple' ? 'bg-purple-500/10 border-purple-500/20 hover:border-purple-400/40 hover:bg-purple-500/20' :
-                      category.color === 'cyan' ? 'bg-cyan-500/10 border-cyan-500/20 hover:border-cyan-400/40 hover:bg-cyan-500/20' :
-                      'bg-green-500/10 border-green-500/20 hover:border-green-400/40 hover:bg-green-500/20'
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: (categoryIndex * 0.1) + (skillIndex * 0.05) }}
+                    className={`text-xs px-2 py-1 rounded border transition-all ${
+                      category.color === 'blue' ? 'bg-blue-500/10 border-blue-500/20 text-blue-300' :
+                      category.color === 'purple' ? 'bg-purple-500/10 border-purple-500/20 text-purple-300' :
+                      category.color === 'cyan' ? 'bg-cyan-500/10 border-cyan-500/20 text-cyan-300' :
+                      category.color === 'green' ? 'bg-green-500/10 border-green-500/20 text-green-300' :
+                      'bg-orange-500/10 border-orange-500/20 text-orange-300'
                     }`}
                   >
-                    <span className="text-white font-medium text-sm group-hover/skill:text-white transition-colors">
-                      {skill}
-                    </span>
-                    
-                    {/* Skill level indicator */}
-                    <div className={`absolute bottom-1 left-3 right-3 h-0.5 rounded-full opacity-60 ${
-                      category.color === 'blue' ? 'bg-gradient-to-r from-blue-600 to-blue-400' :
-                      category.color === 'purple' ? 'bg-gradient-to-r from-purple-600 to-purple-400' :
-                      category.color === 'cyan' ? 'bg-gradient-to-r from-cyan-600 to-cyan-400' :
-                      'bg-gradient-to-r from-green-600 to-green-400'
-                    }`}></div>
+                    {skill}
                   </motion.div>
                 ))}
+                {category.skills.length > 6 && (
+                  <div className="text-xs text-gray-400 font-medium">
+                    +{category.skills.length - 6} more
+                  </div>
+                )}
               </div>
               
               {/* Category Stats */}
@@ -523,8 +511,8 @@ const SkillsContent = ({ data }: { data: PortfolioData }) => {
 // Experience Component  
 const ExperienceContent = ({ data }: { data: PortfolioData }) => {
   const allItems = [
-    ...data.experience.map(exp => ({ ...exp, type: 'experience' as const })),
-    ...data.education.map(edu => ({ ...edu, type: 'education' as const }))
+    ...data.experience.map(exp => ({ ...exp, type: 'experience' as const, uniqueKey: `exp-${exp.id}` })),
+    ...data.education.map(edu => ({ ...edu, type: 'education' as const, uniqueKey: `edu-${edu.id}` }))
   ].sort((a, b) => {
     // Sort by year (newest first) - extracting year from duration
     const yearA = parseInt(a.duration.split(' - ')[0]) || 0
@@ -538,9 +526,9 @@ const ExperienceContent = ({ data }: { data: PortfolioData }) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
-        className="max-w-7xl mx-auto px-6 py-8 text-center"
+        className="w-full px-6 py-8 text-center"
       >
-        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12 border border-blue-200/50">
+        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12 border border-blue-200/50 max-w-4xl mx-auto">
           <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center">
             <Briefcase className="w-10 h-10 text-white" />
           </div>
@@ -558,7 +546,7 @@ const ExperienceContent = ({ data }: { data: PortfolioData }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="max-w-7xl mx-auto px-6 py-8"
+      className="w-full px-6 py-8"
     >
       <motion.h2 
         initial={{ opacity: 0, y: -20 }}
@@ -568,146 +556,64 @@ const ExperienceContent = ({ data }: { data: PortfolioData }) => {
         Professional Journey
       </motion.h2>
       
-      {/* Horizontal Zigzag Timeline */}
-      <div className="relative overflow-hidden">
-        {/* Main Zigzag Line */}
-        <svg 
-          className="absolute top-0 left-0 w-full h-full pointer-events-none"
-          viewBox="0 0 1200 400"
-          preserveAspectRatio="none"
-        >
-          <motion.path
-            d="M50,200 Q200,100 350,200 T650,200 T950,200 T1150,200"
-            stroke="url(#zigzagGradient)"
-            strokeWidth="3"
-            fill="none"
-            strokeDasharray="5,5"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 3, ease: "easeInOut" }}
+      {/* Simple Timeline Grid */}
+      <div className="max-w-6xl mx-auto">
+        {/* Horizontal Line */}
+        <div className="relative mb-8">
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 2, ease: "easeInOut" }}
+            className="h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full mx-auto"
           />
-          <defs>
-            <linearGradient id="zigzagGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#3B82F6" />
-              <stop offset="50%" stopColor="#8B5CF6" />
-              <stop offset="100%" stopColor="#06B6D4" />
-            </linearGradient>
-          </defs>
-        </svg>
+        </div>
 
-        {/* Timeline Items Container */}
-        <div className="relative flex flex-wrap justify-center items-center min-h-[400px] gap-8 py-12">
-          {allItems.map((item, index) => {
-            const isTop = index % 2 === 0
-            const xPosition = (index * 250) + 100 // Spread items horizontally
-            
-            return (
-              <motion.div
-                key={item.id}
-                initial={{ 
-                  opacity: 0, 
-                  y: isTop ? -80 : 80,
-                  x: -50
-                }}
-                animate={{ 
-                  opacity: 1, 
-                  y: isTop ? -120 : 120,
-                  x: 0
-                }}
-                transition={{ 
-                  delay: index * 0.4,
-                  type: "spring",
-                  stiffness: 100,
-                  damping: 15
-                }}
-                className={`absolute ${isTop ? 'top-0' : 'bottom-0'} group`}
-                style={{ left: `${Math.min(xPosition, 90)}%` }}
-              >
-                {/* Connection Line */}
-                <motion.div
-                  initial={{ height: 0 }}
-                  animate={{ height: isTop ? "120px" : "120px" }}
-                  transition={{ delay: index * 0.4 + 0.3 }}
-                  className={`absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-gradient-to-${isTop ? 'b' : 't'} ${
-                    item.type === 'experience' 
-                      ? 'from-blue-500 to-blue-300' 
-                      : 'from-purple-500 to-purple-300'
-                  } ${isTop ? 'top-full' : 'bottom-full'}`}
-                />
+        {/* Timeline Items Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {allItems.map((item, index) => (
+            <motion.div
+              key={item.uniqueKey}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="group"
+            >
+              <div className={`relative bg-gray-900/90 backdrop-blur-xl rounded-xl p-4 border transition-all duration-300 hover:scale-105 ${
+                item.type === 'experience'
+                  ? 'border-blue-500/30 hover:border-blue-400/50'
+                  : 'border-purple-500/30 hover:border-purple-400/50'
+              }`}>
+                {/* Date Badge */}
+                <div className={`inline-block px-2 py-1 rounded-full text-xs font-medium mb-3 ${
+                  item.type === 'experience'
+                    ? 'bg-blue-500/20 text-blue-300'
+                    : 'bg-purple-500/20 text-purple-300'
+                }`}>
+                  {item.duration}
+                </div>
 
-                {/* Timeline Dot */}
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: index * 0.4 + 0.2 }}
-                  className={`absolute left-1/2 transform -translate-x-1/2 ${isTop ? 'top-full mt-[120px]' : 'bottom-full mb-[120px]'} z-10 w-6 h-6 rounded-full border-4 ${
-                    item.type === 'experience' 
-                      ? 'bg-blue-500 border-blue-300' 
-                      : 'bg-purple-500 border-purple-300'
-                  } shadow-lg`}
-                >
-                  <div className={`absolute inset-1 rounded-full ${
-                    item.type === 'experience' ? 'bg-blue-200' : 'bg-purple-200'
-                  } animate-pulse`}></div>
-                </motion.div>
-
-                {/* Content Card */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.4 + 0.5 }}
-                  className="w-72 group/card"
-                >
-                  {/* Background glow */}
-                  <div className={`absolute inset-0 rounded-2xl blur-xl opacity-0 group-hover/card:opacity-20 transition-opacity ${
-                    item.type === 'experience' 
-                      ? 'bg-gradient-to-br from-blue-500 to-blue-600'
-                      : 'bg-gradient-to-br from-purple-500 to-purple-600'
-                  }`}></div>
-                  
-                  <div className={`relative bg-gray-900/90 backdrop-blur-xl rounded-2xl p-6 border transition-all duration-300 group-hover/card:scale-105 ${
-                    item.type === 'experience'
-                      ? 'border-blue-500/30 hover:border-blue-400/50'
-                      : 'border-purple-500/30 hover:border-purple-400/50'
+                {/* Content */}
+                <div className="space-y-2">
+                  <h3 className="text-sm font-bold text-white">
+                    {'position' in item ? item.position : item.degree}
+                  </h3>
+                  <p className={`font-medium text-xs ${
+                    item.type === 'experience' ? 'text-blue-400' : 'text-purple-400'
                   }`}>
-                    {/* Date Badge */}
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.4 + 0.7 }}
-                      className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-4 ${
-                        item.type === 'experience'
-                          ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
-                          : 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
-                      }`}
-                    >
-                      {item.duration}
-                    </motion.div>
+                    {'company' in item ? item.company : item.institution}
+                  </p>
+                  <p className="text-gray-300 text-xs leading-relaxed line-clamp-2">
+                    {item.description}
+                  </p>
+                </div>
 
-                    {/* Content */}
-                    <div className="space-y-3">
-                      <h3 className="text-lg font-bold text-white">
-                        {'position' in item ? item.position : item.degree}
-                      </h3>
-                      <p className={`font-semibold text-sm ${
-                        item.type === 'experience' ? 'text-blue-400' : 'text-purple-400'
-                      }`}>
-                        {'company' in item ? item.company : item.institution}
-                      </p>
-                      <p className="text-gray-300 text-xs leading-relaxed line-clamp-3">
-                        {item.description}
-                      </p>
-                    </div>
-
-                    {/* Type Indicator */}
-                    <div className={`absolute top-3 right-3 w-3 h-3 rounded-full ${
-                      item.type === 'experience' ? 'bg-blue-400' : 'bg-purple-400'
-                    } animate-pulse`}></div>
-                  </div>
-                </motion.div>
-              </motion.div>
-            )
-          })}
+                {/* Type Indicator */}
+                <div className={`absolute top-2 right-2 w-2 h-2 rounded-full ${
+                  item.type === 'experience' ? 'bg-blue-400' : 'bg-purple-400'
+                }`}></div>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
         {/* Current Status */}
@@ -783,9 +689,9 @@ const ContactContent = ({ data }: { data: PortfolioData }) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
-        className="max-w-7xl mx-auto px-6 py-8 text-center"
+        className="w-full px-6 py-8 text-center"
       >
-        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12 border border-blue-200/50">
+        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12 border border-blue-200/50 max-w-4xl mx-auto">
           <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center">
             <Mail className="w-10 h-10 text-white" />
           </div>
@@ -803,7 +709,7 @@ const ContactContent = ({ data }: { data: PortfolioData }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="max-w-7xl mx-auto px-6 py-8"
+      className="w-full px-6 py-8"
     >
       <motion.h2 
         initial={{ opacity: 0, y: -20 }}
@@ -813,268 +719,68 @@ const ContactContent = ({ data }: { data: PortfolioData }) => {
         Let&apos;s Build Something Amazing Together
       </motion.h2>
       
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
-        {/* Contact Methods */}
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
+      <div className="max-w-5xl mx-auto text-center">
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="space-y-8"
+          className="text-gray-300 text-lg mb-8"
         >
-          <div className="mb-10">
-            <motion.h3 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-3xl font-bold text-white mb-6"
-            >
-              Get In Touch
-            </motion.h3>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="text-gray-300 text-lg leading-relaxed"
-            >
-              I&apos;m always excited to discuss new opportunities, collaborate on innovative projects, 
-              or simply chat about the latest in tech and cybersecurity. Let&apos;s connect!
-            </motion.p>
-          </div>
-          
-          <div className="space-y-6">
-            {contactMethods.map((method, index) => {
-              const Icon = method.icon
-              return (
-                <motion.a
-                  key={method.label}
-                  href={method.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, x: -30, scale: 0.9 }}
-                  animate={{ opacity: 1, x: 0, scale: 1 }}
-                  transition={{ 
-                    delay: 0.5 + index * 0.15,
-                    type: "spring",
-                    stiffness: 100
-                  }}
-                  whileHover={{ scale: 1.02, x: 10 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="group relative block"
-                >
-                  {/* Background glow */}
-                  <div className={`absolute inset-0 bg-gradient-to-r ${method.gradient} opacity-0 group-hover:opacity-20 blur-xl rounded-3xl transition-opacity duration-500`}></div>
-                  
-                  <div className={`relative flex items-center p-6 rounded-3xl border-2 transition-all duration-500 bg-gray-900/60 backdrop-blur-xl group-hover:bg-gray-900/80 ${
-                    method.color === 'blue' ? 'border-blue-500/20 group-hover:border-blue-400/60' :
-                    method.color === 'purple' ? 'border-purple-500/20 group-hover:border-purple-400/60' :
-                    'border-cyan-500/20 group-hover:border-cyan-400/60'
+          Ready to collaborate? Let&apos;s connect and build something amazing together!
+        </motion.p>
+        
+        {/* Contact Tiles Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {contactMethods.map((method, index) => {
+            const Icon = method.icon
+            return (
+              <motion.a
+                key={method.label}
+                href={method.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + index * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative"
+              >
+                <div className={`relative bg-gray-900/80 backdrop-blur-xl rounded-xl p-4 border transition-all duration-300 hover:scale-105 ${
+                  method.color === 'blue' ? 'border-blue-500/30 hover:border-blue-400/50' :
+                  method.color === 'purple' ? 'border-purple-500/30 hover:border-purple-400/50' :
+                  'border-cyan-500/30 hover:border-cyan-400/50'
+                }`}>
+                  {/* Icon */}
+                  <div className={`w-12 h-12 mx-auto mb-3 rounded-lg flex items-center justify-center ${
+                    method.color === 'blue' ? 'bg-blue-500/10' :
+                    method.color === 'purple' ? 'bg-purple-500/10' :
+                    'bg-cyan-500/10'
                   }`}>
-                    {/* Icon Container */}
-                    <div className={`relative p-4 rounded-2xl mr-6 ${
-                      method.color === 'blue' ? 'bg-blue-500/10 group-hover:bg-blue-500/20' :
-                      method.color === 'purple' ? 'bg-purple-500/10 group-hover:bg-purple-500/20' :
-                      'bg-cyan-500/10 group-hover:bg-cyan-500/20'
-                    } transition-colors duration-300`}>
-                      {/* Icon glow */}
-                      <div className={`absolute inset-0 bg-gradient-to-br ${method.gradient} opacity-20 group-hover:opacity-40 blur-md rounded-2xl transition-opacity duration-300`}></div>
-                      <Icon className={`relative w-8 h-8 transition-all duration-300 group-hover:scale-110 ${
-                        method.color === 'blue' ? 'text-blue-400 group-hover:text-blue-300' :
-                        method.color === 'purple' ? 'text-purple-400 group-hover:text-purple-300' :
-                        'text-cyan-400 group-hover:text-cyan-300'
-                      }`} />
-                    </div>
-                    
-                    {/* Content */}
-                    <div className="flex-1">
-                      <h4 className="font-bold text-xl text-white group-hover:text-white transition-colors mb-1">
-                        {method.label}
-                      </h4>
-                      <p className={`font-medium mb-2 ${
-                        method.color === 'blue' ? 'text-blue-300 group-hover:text-blue-200' :
-                        method.color === 'purple' ? 'text-purple-300 group-hover:text-purple-200' :
-                        'text-cyan-300 group-hover:text-cyan-200'
-                      } transition-colors duration-300`}>
-                        {method.value}
-                      </p>
-                      <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                        {method.description}
-                      </p>
-                    </div>
-                    
-                    {/* Arrow */}
-                    <ExternalLink className={`w-6 h-6 text-gray-400 group-hover:text-white transition-all duration-300 group-hover:translate-x-1 ${
-                      method.color === 'blue' ? 'group-hover:text-blue-300' :
-                      method.color === 'purple' ? 'group-hover:text-purple-300' :
-                      'group-hover:text-cyan-300'
+                    <Icon className={`w-6 h-6 ${
+                      method.color === 'blue' ? 'text-blue-400' :
+                      method.color === 'purple' ? 'text-purple-400' :
+                      'text-cyan-400'
                     }`} />
                   </div>
-                </motion.a>
-              )
-            })}
-          </div>
-        </motion.div>
-
-        {/* Visual Element - Enhanced Orbital Animation */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.6 }}
-          className="flex justify-center lg:justify-end"
-        >
-          <div className="relative w-96 h-96">
-            {/* Background glow layers */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute inset-8 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-600/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-            
-            {/* Main container */}
-            <motion.div
-              initial={{ scale: 0.8, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ 
-                delay: 0.8,
-                type: "spring",
-                stiffness: 100,
-                damping: 15
-              }}
-              className="relative w-full h-full bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-full border-2 border-gray-600/50 flex items-center justify-center overflow-hidden"
-            >
-              {/* Animated orbital rings */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-4 border-2 border-blue-500/30 rounded-full"
-              />
-              <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-8 border-2 border-purple-500/30 rounded-full border-dashed"
-              />
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-12 border-2 border-cyan-500/30 rounded-full"
-              />
-              
-              {/* Floating particles */}
-              {[...Array(6)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className={`absolute w-2 h-2 rounded-full ${
-                    i % 3 === 0 ? 'bg-blue-400' : i % 3 === 1 ? 'bg-purple-400' : 'bg-cyan-400'
-                  }`}
-                  animate={{
-                    x: [0, 30, -30, 0],
-                    y: [0, -30, 30, 0],
-                    scale: [1, 1.5, 0.5, 1],
-                    opacity: [0.4, 1, 0.4, 0.4],
-                  }}
-                  transition={{
-                    duration: 4 + i,
-                    repeat: Infinity,
-                    delay: i * 0.5,
-                    ease: "easeInOut"
-                  }}
-                  style={{
-                    left: `${30 + (i * 10)}%`,
-                    top: `${30 + (i * 8)}%`,
-                  }}
-                />
-              ))}
-              
-              {/* Center content */}
-              <div className="relative z-10 text-center">
-                <motion.div
-                  animate={{ 
-                    scale: [1, 1.1, 1],
-                    rotate: [0, 5, -5, 0]
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                  className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-blue-500 via-purple-500 to-cyan-500 rounded-full flex items-center justify-center relative overflow-hidden"
-                >
-                  {/* Inner glow */}
-                  <div className="absolute inset-2 bg-gradient-to-br from-blue-400 via-purple-400 to-cyan-400 rounded-full opacity-50 blur-sm"></div>
-                  <Mail className="relative w-12 h-12 text-white drop-shadow-lg" />
-                </motion.div>
-                
-                <motion.h4 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.2 }}
-                  className="text-2xl font-bold text-white mb-3"
-                >
-                  Ready to Connect?
-                </motion.h4>
-                <motion.p 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.4 }}
-                  className="text-gray-300"
-                >
-                  Let&apos;s make something incredible
-                </motion.p>
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Enhanced Call to action */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.6 }}
-        className="text-center mt-20"
-      >
-        <div className="relative">
-          {/* Background glow */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 rounded-3xl blur-xl"></div>
-          
-          <div className="relative bg-gray-900/80 backdrop-blur-xl rounded-3xl p-10 border border-gray-700/50">
-            <motion.h4 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.8 }}
-              className="text-2xl font-bold text-white mb-4"
-            >
-              Available for Opportunities
-            </motion.h4>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2 }}
-              className="text-gray-300 text-lg mb-6 max-w-2xl mx-auto"
-            >
-              Currently open to full-time positions, freelance projects, and exciting collaborations 
-              in AI, cybersecurity, and full-stack development.
-            </motion.p>
-            
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 2.2 }}
-              className="flex justify-center items-center space-x-4"
-            >
-              <div className="flex items-center space-x-2">
-                <motion.div
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="w-3 h-3 bg-green-400 rounded-full"
-                />
-                <span className="text-green-400 font-semibold">Available Now</span>
-              </div>
-              <div className="w-px h-6 bg-gray-600"></div>
-              <div className="flex items-center space-x-2">
-                <Github className="w-5 h-5 text-gray-400" />
-                <span className="text-gray-400">Follow for updates</span>
-              </div>
-            </motion.div>
-          </div>
+                  
+                  {/* Label */}
+                  <h4 className="font-semibold text-white text-sm mb-1">
+                    {method.label}
+                  </h4>
+                  <p className={`text-xs ${
+                    method.color === 'blue' ? 'text-blue-300' :
+                    method.color === 'purple' ? 'text-purple-300' :
+                    'text-cyan-300'
+                  }`}>
+                    Connect
+                  </p>
+                </div>
+              </motion.a>
+            )
+          })}
         </div>
-      </motion.div>
+      </div>
     </motion.div>
   )
 }
