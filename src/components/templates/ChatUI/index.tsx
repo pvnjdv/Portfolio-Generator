@@ -379,7 +379,7 @@ const SkillsContent = ({ data }: { data: PortfolioData }) => {
         Technical Skills & Expertise
       </motion.h2>
       
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
         {skillCategories.map((category, categoryIndex) => (
           <motion.div
             key={category.title}
@@ -388,7 +388,7 @@ const SkillsContent = ({ data }: { data: PortfolioData }) => {
             transition={{ delay: categoryIndex * 0.1 }}
             className="relative group"
           >
-            <div className={`relative bg-gray-900/80 backdrop-blur-xl rounded-xl p-6 border transition-all duration-300 hover:scale-105 min-h-[280px] ${
+            <div className={`relative bg-gray-900/80 backdrop-blur-xl rounded-xl p-6 border transition-all duration-300 hover:scale-105 min-h-[260px] ${
               category.color === 'blue' ? 'border-blue-500/30 hover:border-blue-400/50' :
               category.color === 'purple' ? 'border-purple-500/30 hover:border-purple-400/50' :
               category.color === 'cyan' ? 'border-cyan-500/30 hover:border-cyan-400/50' :
@@ -910,15 +910,16 @@ export default function ChatUI({ data }: ChatUIProps) {
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900"></div>
       
       {/* Main content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 pt-2">
+      <div className="relative z-10 flex flex-col min-h-screen">
         
+        <div className="flex-1 flex flex-col items-center justify-center w-full px-4 pt-2 pb-32">
         {/* Header Section - Only show when no tab is active */}
         {!activeTab && (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="flex flex-col items-center justify-center w-full max-w-3xl mx-auto py-8 sm:py-12"
+            className="flex flex-col items-center justify-center w-full max-w-4xl mx-auto py-12 sm:py-16"
           >
             <div className="text-center w-full">
               <motion.p 
@@ -957,7 +958,7 @@ export default function ChatUI({ data }: ChatUIProps) {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 mb-6 sm:mb-8"
+              className="w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 xl:w-64 xl:h-64 mb-8 sm:mb-10"
             >
               <Image
                 src="/profile.png"
@@ -969,7 +970,7 @@ export default function ChatUI({ data }: ChatUIProps) {
             </motion.div>
 
             {/* Search Input */}
-            <div className="w-full max-w-2xl mx-auto mb-6 sm:mb-8 px-2">
+            <div className="w-full max-w-3xl mx-auto mb-4 px-2">
               <AIInput 
                 onSubmit={handleSearch}
                 placeholder={searchResult ? "Search for something else..." : "Ask me about my skills, projects, or experience..."}
@@ -1062,13 +1063,16 @@ export default function ChatUI({ data }: ChatUIProps) {
           </div>
         )}
 
-        {/* Navigation Buttons - Always visible */}
+        </div>
+
+        {/* Navigation Buttons - Always visible and sticky at bottom */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="flex items-center justify-center flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8 px-2"
+          className="fixed bottom-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-t border-gray-700/50 p-4"
         >
+          <div className="flex items-center justify-center flex-wrap gap-3 sm:gap-4 max-w-6xl mx-auto">
           {navItems.map((item, index) => {
             const Icon = item.icon
             const isActive = activeTab === item.name
@@ -1082,14 +1086,14 @@ export default function ChatUI({ data }: ChatUIProps) {
               >
                 <GlassButton
                   variant={item.variant as "primary" | "secondary" | "success" | "warning" | "danger"}
-                  size="sm"
+                  size="md"
                   isActive={isActive}
                   onClick={() => setActiveTab(activeTab === item.name ? null : item.name)}
                   className="group relative"
                 >
-                  <div className="flex items-center gap-1 sm:gap-2 px-1 sm:px-2">
-                    <Icon size={14} className="sm:w-4 sm:h-4 transition-transform group-hover:scale-110" />
-                    <span className="text-xs sm:text-sm font-medium">
+                  <div className="flex items-center gap-2 sm:gap-3 px-2 sm:px-3">
+                    <Icon size={16} className="sm:w-5 sm:h-5 transition-transform group-hover:scale-110" />
+                    <span className="text-sm sm:text-base font-medium">
                       {item.name}
                     </span>
                   </div>
@@ -1097,6 +1101,7 @@ export default function ChatUI({ data }: ChatUIProps) {
               </motion.div>
             )
           })}
+          </div>
         </motion.div>
       </div>
     </div>
