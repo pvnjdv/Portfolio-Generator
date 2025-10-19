@@ -26,14 +26,14 @@ const AboutMeContent = ({ data }: { data: PortfolioData }) => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
-    className="w-full px-6 flex items-center justify-center min-h-[60vh]"
+    className="w-full px-6 flex items-center justify-center py-4"
   >
     <div className="relative max-w-4xl mx-auto">
       {/* Background glow effects */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-cyan-600/10 rounded-3xl blur-2xl"></div>
-      <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-600/20 rounded-3xl blur-3xl opacity-30"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-cyan-600/10 rounded-2xl blur-xl"></div>
+      <div className="absolute -inset-1 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-600/20 rounded-2xl blur-2xl opacity-30"></div>
       
-      <div className="relative bg-gray-900/80 backdrop-blur-xl rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
+      <div className="relative bg-gray-900/80 backdrop-blur-xl rounded-2xl p-6 border border-gray-700/50 shadow-xl">
         <div className="grid lg:grid-cols-3 gap-8 items-start">
           {/* Profile Image Section */}
           <div className="lg:col-span-1 flex flex-col items-center space-y-6">
@@ -175,153 +175,122 @@ const ProjectsContent = ({ data }: { data: PortfolioData }) => {
       <motion.h2 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-4xl font-bold mb-16 text-center bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent"
+        className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent"
       >
-        Featured Projects & Innovation
+        Featured Projects
       </motion.h2>
     
-    <div className="grid lg:grid-cols-2 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {data.projects.map((project, index) => (
         <motion.div
           key={project.id}
-          initial={{ opacity: 0, y: 30, scale: 0.9 }}
+          initial={{ opacity: 0, y: 20, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ 
-            delay: index * 0.2,
+            delay: index * 0.1,
             type: "spring",
-            stiffness: 100,
-            damping: 15
+            stiffness: 200,
+            damping: 20
           }}
-          className="group relative"
+          className="group relative bg-gray-900/60 backdrop-blur-sm rounded-2xl p-4 border border-gray-700/30 hover:border-gray-600/50 transition-all duration-300 hover:scale-[1.02] h-fit"
         >
-          {/* Background glow */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-cyan-600/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-          
-          <div className="relative bg-gray-900/80 backdrop-blur-xl rounded-3xl p-8 border border-gray-700/50 group-hover:border-gray-600/80 transition-all duration-500 group-hover:scale-105">
-            {/* Project Header */}
-            <div className="flex items-start justify-between mb-6">
-              <div className="flex-1">
-                <motion.h3 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: index * 0.2 + 0.3 }}
-                  className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors mb-2"
-                >
-                  {project.title}
-                </motion.h3>
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: "100%" }}
-                  transition={{ delay: index * 0.2 + 0.4, duration: 0.8 }}
-                  className="h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full mb-4"
-                />
-              </div>
-              
-              {/* Project Number */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.2 + 0.5 }}
-                className="w-12 h-12 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full flex items-center justify-center border border-blue-500/30"
-              >
-                <span className="text-blue-400 font-bold text-sm">0{index + 1}</span>
-              </motion.div>
-            </div>
-
-            {/* Description */}
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 + 0.4 }}
-              className="text-gray-300 leading-relaxed mb-6 text-base"
-            >
-              {project.description}
-            </motion.p>
-
-            {/* Technologies */}
-            <motion.div 
+          {/* Project Header */}
+          <div className="flex items-center justify-between mb-3">
+            <motion.h3 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: index * 0.2 + 0.5 }}
-              className="mb-6"
+              transition={{ delay: index * 0.1 + 0.2 }}
+              className="text-lg font-bold text-white group-hover:text-blue-400 transition-colors truncate flex-1"
             >
-              <h4 className="text-sm font-semibold text-gray-400 mb-3 uppercase tracking-wider">Technologies Used</h4>
-              <div className="flex flex-wrap gap-2">
-                {project.technologies.map((tech, i) => (
-                  <motion.span
-                    key={i}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.2 + 0.6 + i * 0.05 }}
-                    className="group/tech px-3 py-1.5 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-lg text-xs font-medium text-blue-300 hover:border-blue-400/40 hover:bg-blue-500/20 transition-all duration-300 cursor-default"
-                  >
-                    {tech}
-                  </motion.span>
-                ))}
-              </div>
-            </motion.div>
+              {project.title}
+            </motion.h3>
+            <span className="text-blue-400 font-bold text-xs ml-2">#{index + 1}</span>
+          </div>
 
-            {/* Action Links */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 + 0.7 }}
-              className="flex gap-4"
-            >
-              {project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group/link flex items-center px-4 py-2 bg-purple-500/10 border border-purple-500/30 rounded-xl text-purple-300 hover:border-purple-400/50 hover:bg-purple-500/20 transition-all duration-300"
+          {/* Description */}
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 + 0.3 }}
+            className="text-gray-300 text-sm leading-relaxed mb-3 line-clamp-2"
+          >
+            {project.description}
+          </motion.p>
+
+          {/* Technologies */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: index * 0.1 + 0.4 }}
+            className="mb-3"
+          >
+            <div className="flex flex-wrap gap-1">
+              {project.technologies.slice(0, 3).map((tech, i) => (
+                <span
+                  key={i}
+                  className="px-2 py-1 bg-blue-500/10 border border-blue-500/20 rounded-md text-xs font-medium text-blue-300"
                 >
-                  <Github className="w-4 h-4 mr-2 group-hover/link:scale-110 transition-transform" />
-                  <span className="text-sm font-medium">View Code</span>
-                </a>
+                  {tech}
+                </span>
+              ))}
+              {project.technologies.length > 3 && (
+                <span className="px-2 py-1 text-xs text-gray-400">
+                  +{project.technologies.length - 3} more
+                </span>
               )}
+            </div>
+          </motion.div>
+
+          {/* Action Links */}
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 + 0.5 }}
+            className="flex gap-2"
+          >
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center px-3 py-1.5 bg-purple-500/10 border border-purple-500/30 rounded-lg text-purple-300 hover:border-purple-400/50 hover:bg-purple-500/20 transition-all duration-300 text-xs"
+              >
+                <Github className="w-3 h-3 mr-1.5" />
+                <span>Code</span>
+              </a>
+              )}
+              ){'}'}
               {project.projectUrl && (
                 <a
                   href={project.projectUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/link flex items-center px-4 py-2 bg-cyan-500/10 border border-cyan-500/30 rounded-xl text-cyan-300 hover:border-cyan-400/50 hover:bg-cyan-500/20 transition-all duration-300"
+                  className="flex items-center px-3 py-1.5 bg-cyan-500/10 border border-cyan-500/30 rounded-lg text-cyan-300 hover:border-cyan-400/50 hover:bg-cyan-500/20 transition-all duration-300 text-xs"
                 >
-                  <ExternalLink className="w-4 h-4 mr-2 group-hover/link:scale-110 transition-transform" />
-                  <span className="text-sm font-medium">Live Demo</span>
+                  <ExternalLink className="w-3 h-3 mr-1.5" />
+                  <span>Demo</span>
                 </a>
               )}
             </motion.div>
-
-            {/* Status Indicator */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: index * 0.2 + 0.8 }}
-              className="absolute top-6 right-6 flex items-center space-x-2"
-            >
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-green-400 text-xs font-medium">Active</span>
-            </motion.div>
-          </div>
         </motion.div>
       ))}
     </div>
 
     {/* Additional Projects CTA */}
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: data.projects.length * 0.2 + 0.5 }}
-      className="text-center mt-16"
+      transition={{ delay: data.projects.length * 0.1 + 0.3 }}
+      className="text-center mt-4"
     >
-      <div className="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/50">
-        <h4 className="text-xl font-semibold text-white mb-3">More Projects Coming Soon</h4>
-        <p className="text-gray-300 mb-4">
-          I&apos;m constantly working on new projects and expanding my portfolio. Check back regularly for updates!
+      <div className="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50">
+        <h4 className="text-lg font-semibold text-white mb-2">More Projects Coming Soon</h4>
+        <p className="text-gray-300 text-sm mb-3">
+          I&apos;m constantly working on new projects. Check back regularly for updates!
         </p>
         <div className="flex justify-center items-center space-x-2">
-          <Github className="w-5 h-5 text-gray-400" />
-          <span className="text-gray-400">Follow my GitHub for the latest updates</span>
+          <Github className="w-4 h-4 text-gray-400" />
+          <span className="text-gray-400 text-sm">Follow my GitHub for updates</span>
         </div>
       </div>
     </motion.div>
@@ -404,12 +373,12 @@ const SkillsContent = ({ data }: { data: PortfolioData }) => {
       <motion.h2 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent"
+        className="text-2xl font-bold mb-4 text-center bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent"
       >
         Technical Skills & Expertise
       </motion.h2>
       
-      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-3">
         {skillCategories.map((category, categoryIndex) => (
           <motion.div
             key={category.title}
@@ -418,7 +387,7 @@ const SkillsContent = ({ data }: { data: PortfolioData }) => {
             transition={{ delay: categoryIndex * 0.1 }}
             className="relative group"
           >
-            <div className={`relative bg-gray-900/80 backdrop-blur-xl rounded-xl p-4 border transition-all duration-300 hover:scale-105 ${
+            <div className={`relative bg-gray-900/80 backdrop-blur-xl rounded-xl p-3 border transition-all duration-300 hover:scale-105 ${
               category.color === 'blue' ? 'border-blue-500/30 hover:border-blue-400/50' :
               category.color === 'purple' ? 'border-purple-500/30 hover:border-purple-400/50' :
               category.color === 'cyan' ? 'border-cyan-500/30 hover:border-cyan-400/50' :
@@ -426,9 +395,9 @@ const SkillsContent = ({ data }: { data: PortfolioData }) => {
               'border-orange-500/30 hover:border-orange-400/50'
             }`}>
               {/* Header */}
-              <div className="flex items-center mb-3">
-                <span className="text-lg mr-2">{category.icon}</span>
-                <h3 className={`text-sm font-bold ${
+              <div className="flex items-center mb-2">
+                <span className="text-md mr-1">{category.icon}</span>
+                <h3 className={`text-xs font-bold ${
                   category.color === 'blue' ? 'text-blue-400' :
                   category.color === 'purple' ? 'text-purple-400' :
                   category.color === 'cyan' ? 'text-cyan-400' :
@@ -440,14 +409,14 @@ const SkillsContent = ({ data }: { data: PortfolioData }) => {
               </div>
               
               {/* Skills List */}
-              <div className="space-y-2">
-                {category.skills.slice(0, 6).map((skill, skillIndex) => (
+              <div className="space-y-1">
+                {category.skills.slice(0, 5).map((skill, skillIndex) => (
                   <motion.div
                     key={skill}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: (categoryIndex * 0.1) + (skillIndex * 0.05) }}
-                    className={`text-xs px-2 py-1 rounded border transition-all ${
+                    className={`text-xs px-2 py-0.5 rounded border transition-all ${
                       category.color === 'blue' ? 'bg-blue-500/10 border-blue-500/20 text-blue-300' :
                       category.color === 'purple' ? 'bg-purple-500/10 border-purple-500/20 text-purple-300' :
                       category.color === 'cyan' ? 'bg-cyan-500/10 border-cyan-500/20 text-cyan-300' :
@@ -458,9 +427,9 @@ const SkillsContent = ({ data }: { data: PortfolioData }) => {
                     {skill}
                   </motion.div>
                 ))}
-                {category.skills.length > 6 && (
+                {category.skills.length > 5 && (
                   <div className="text-xs text-gray-400 font-medium">
-                    +{category.skills.length - 6} more
+                    +{category.skills.length - 5} more
                   </div>
                 )}
               </div>
@@ -546,12 +515,12 @@ const ExperienceContent = ({ data }: { data: PortfolioData }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="w-full px-6 py-8"
+      className="w-full px-6 py-4"
     >
       <motion.h2 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-4xl font-bold mb-16 text-center bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent"
+        className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent"
       >
         Professional Journey
       </motion.h2>
@@ -559,17 +528,17 @@ const ExperienceContent = ({ data }: { data: PortfolioData }) => {
       {/* Simple Timeline Grid */}
       <div className="max-w-6xl mx-auto">
         {/* Horizontal Line */}
-        <div className="relative mb-8">
+        <div className="relative mb-4">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: "100%" }}
             transition={{ duration: 2, ease: "easeInOut" }}
-            className="h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full mx-auto"
+            className="h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full mx-auto"
           />
         </div>
 
         {/* Timeline Items Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
           {allItems.map((item, index) => (
             <motion.div
               key={item.uniqueKey}
@@ -578,13 +547,13 @@ const ExperienceContent = ({ data }: { data: PortfolioData }) => {
               transition={{ delay: index * 0.1 }}
               className="group"
             >
-              <div className={`relative bg-gray-900/90 backdrop-blur-xl rounded-xl p-4 border transition-all duration-300 hover:scale-105 ${
+              <div className={`relative bg-gray-900/90 backdrop-blur-xl rounded-xl p-3 border transition-all duration-300 hover:scale-105 ${
                 item.type === 'experience'
                   ? 'border-blue-500/30 hover:border-blue-400/50'
                   : 'border-purple-500/30 hover:border-purple-400/50'
               }`}>
                 {/* Date Badge */}
-                <div className={`inline-block px-2 py-1 rounded-full text-xs font-medium mb-3 ${
+                <div className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium mb-2 ${
                   item.type === 'experience'
                     ? 'bg-blue-500/20 text-blue-300'
                     : 'bg-purple-500/20 text-purple-300'
@@ -709,14 +678,14 @@ const ContactContent = ({ data }: { data: PortfolioData }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="w-full px-6 py-8"
+      className="w-full px-6 py-4"
     >
       <motion.h2 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-4xl font-bold mb-16 text-center bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent"
+        className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent"
       >
-        Let&apos;s Build Something Amazing Together
+        Let&apos;s Connect
       </motion.h2>
       
       <div className="max-w-5xl mx-auto text-center">
@@ -724,9 +693,9 @@ const ContactContent = ({ data }: { data: PortfolioData }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="text-gray-300 text-lg mb-8"
+          className="text-gray-300 text-sm mb-4"
         >
-          Ready to collaborate? Let&apos;s connect and build something amazing together!
+          Ready to collaborate? Let&apos;s connect!
         </motion.p>
         
         {/* Contact Tiles Grid */}
@@ -746,13 +715,13 @@ const ContactContent = ({ data }: { data: PortfolioData }) => {
                 whileTap={{ scale: 0.95 }}
                 className="group relative"
               >
-                <div className={`relative bg-gray-900/80 backdrop-blur-xl rounded-xl p-4 border transition-all duration-300 hover:scale-105 ${
+                <div className={`relative bg-gray-900/80 backdrop-blur-xl rounded-xl p-3 border transition-all duration-300 hover:scale-105 ${
                   method.color === 'blue' ? 'border-blue-500/30 hover:border-blue-400/50' :
                   method.color === 'purple' ? 'border-purple-500/30 hover:border-purple-400/50' :
                   'border-cyan-500/30 hover:border-cyan-400/50'
                 }`}>
                   {/* Icon */}
-                  <div className={`w-12 h-12 mx-auto mb-3 rounded-lg flex items-center justify-center ${
+                  <div className={`w-8 h-8 mx-auto mb-2 rounded-lg flex items-center justify-center ${
                     method.color === 'blue' ? 'bg-blue-500/10' :
                     method.color === 'purple' ? 'bg-purple-500/10' :
                     'bg-cyan-500/10'
@@ -878,7 +847,7 @@ export default function ChatUI({ data }: ChatUIProps) {
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900"></div>
       
       {/* Main content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-[10vh] px-4 pt-2">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-[5vh] px-4 pt-1">
         
         {/* Header Section - Only show when no tab is active */}
         {!activeTab && (
