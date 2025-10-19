@@ -181,7 +181,8 @@ const ProjectsContent = ({ data }: { data: PortfolioData }) => {
         Featured Projects
       </motion.h2>
     
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {data.projects.map((project, index) => (
         <motion.div
           key={project.id}
@@ -193,50 +194,54 @@ const ProjectsContent = ({ data }: { data: PortfolioData }) => {
             stiffness: 200,
             damping: 20
           }}
-          className="group relative bg-gray-900/60 backdrop-blur-sm rounded-2xl p-4 border border-gray-700/30 hover:border-gray-600/50 transition-all duration-300 hover:scale-[1.02] h-fit"
+          className="group relative bg-gray-900/90 backdrop-blur-xl rounded-xl p-4 border border-gray-700/30 hover:border-gray-600/50 transition-all duration-300 hover:scale-105 min-h-[180px]"
         >
-          {/* Project Header */}
-          <div className="flex items-center justify-between mb-3">
+          {/* Project Number Badge */}
+          <div className="inline-block px-2 py-1 rounded-full text-xs font-medium mb-3 bg-blue-500/20 text-blue-300">
+            #{index + 1}
+          </div>
+
+          {/* Project Content */}
+          <div className="space-y-2">
             <motion.h3 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: index * 0.1 + 0.2 }}
-              className="text-lg font-bold text-white group-hover:text-blue-400 transition-colors truncate flex-1"
+              className="text-base font-bold text-white"
             >
               {project.title}
             </motion.h3>
-            <span className="text-blue-400 font-bold text-xs ml-2">#{index + 1}</span>
-          </div>
 
-          {/* Description */}
-          <motion.p 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 + 0.3 }}
-            className="text-gray-300 text-sm leading-relaxed mb-3 line-clamp-2"
-          >
-            {project.description}
-          </motion.p>
+            {/* Description */}
+            <motion.p 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 + 0.3 }}
+              className="text-gray-300 text-xs leading-relaxed line-clamp-2"
+            >
+              {project.description}
+            </motion.p>
+          </div>
 
           {/* Technologies */}
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: index * 0.1 + 0.4 }}
-            className="mb-3"
+            className="mb-2"
           >
             <div className="flex flex-wrap gap-1">
-              {project.technologies.slice(0, 3).map((tech, i) => (
+              {project.technologies.slice(0, 2).map((tech, i) => (
                 <span
                   key={i}
-                  className="px-2 py-1 bg-blue-500/10 border border-blue-500/20 rounded-md text-xs font-medium text-blue-300"
+                  className="px-1.5 py-0.5 bg-blue-500/10 border border-blue-500/20 rounded text-xs font-medium text-blue-300"
                 >
                   {tech}
                 </span>
               ))}
-              {project.technologies.length > 3 && (
-                <span className="px-2 py-1 text-xs text-gray-400">
-                  +{project.technologies.length - 3} more
+              {project.technologies.length > 2 && (
+                <span className="px-1.5 py-0.5 text-xs text-gray-400">
+                  +{project.technologies.length - 2}
                 </span>
               )}
             </div>
@@ -247,56 +252,43 @@ const ProjectsContent = ({ data }: { data: PortfolioData }) => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 + 0.5 }}
-            className="flex gap-2"
+            className="flex gap-1"
           >
             {project.githubUrl && (
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center px-3 py-1.5 bg-purple-500/10 border border-purple-500/30 rounded-lg text-purple-300 hover:border-purple-400/50 hover:bg-purple-500/20 transition-all duration-300 text-xs"
+                className="flex items-center px-2 py-1 bg-purple-500/10 border border-purple-500/30 rounded text-purple-300 hover:border-purple-400/50 hover:bg-purple-500/20 transition-all duration-300 text-xs"
               >
                 <Github className="w-3 h-3 mr-1.5" />
                 <span>Code</span>
               </a>
-              )}
-              ){'}'}
-              {project.projectUrl && (
-                <a
-                  href={project.projectUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center px-3 py-1.5 bg-cyan-500/10 border border-cyan-500/30 rounded-lg text-cyan-300 hover:border-cyan-400/50 hover:bg-cyan-500/20 transition-all duration-300 text-xs"
-                >
-                  <ExternalLink className="w-3 h-3 mr-1.5" />
-                  <span>Demo</span>
-                </a>
-              )}
-            </motion.div>
+            )}
+            {project.projectUrl && (
+              <a
+                href={project.projectUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center px-2 py-1 bg-cyan-500/10 border border-cyan-500/30 rounded text-cyan-300 hover:border-cyan-400/50 hover:bg-cyan-500/20 transition-all duration-300 text-xs"
+              >
+                <ExternalLink className="w-3 h-3 mr-1.5" />
+                <span>Demo</span>
+              </a>
+            )}
+          </motion.div>
+
+          {/* Type Indicator */}
+          <div className="absolute top-3 right-3 w-3 h-3 rounded-full bg-blue-400"></div>
         </motion.div>
       ))}
+      </div>
     </div>
 
-    {/* Additional Projects CTA */}
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: data.projects.length * 0.1 + 0.3 }}
-      className="text-center mt-4"
-    >
-      <div className="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50">
-        <h4 className="text-lg font-semibold text-white mb-2">More Projects Coming Soon</h4>
-        <p className="text-gray-300 text-sm mb-3">
-          I&apos;m constantly working on new projects. Check back regularly for updates!
-        </p>
-        <div className="flex justify-center items-center space-x-2">
-          <Github className="w-4 h-4 text-gray-400" />
-          <span className="text-gray-400 text-sm">Follow my GitHub for updates</span>
-        </div>
-      </div>
-    </motion.div>
+    
   </motion.div>
-)}
+)
+}
 
 // Skills Component
 const SkillsContent = ({ data }: { data: PortfolioData }) => {
@@ -458,37 +450,6 @@ const SkillsContent = ({ data }: { data: PortfolioData }) => {
           </motion.div>
         ))}
       </div>
-      
-      {/* Additional Skills */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1 }}
-        className="mt-12 text-center"
-      >
-        <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/50">
-          <h4 className="text-xl font-semibold text-gray-300 mb-6">Always Learning & Growing</h4>
-          <p className="text-gray-400 text-base leading-relaxed max-w-2xl mx-auto">
-            Continuously expanding my skill set with emerging technologies and industry best practices.
-            Currently exploring advanced AI/ML techniques, modern cybersecurity frameworks, and cutting-edge
-            development methodologies to stay at the forefront of innovation.
-          </p>
-          <div className="flex justify-center items-center gap-4 mt-6">
-            <div className="flex items-center gap-2 px-4 py-2 bg-blue-500/10 rounded-full border border-blue-500/20">
-              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-              <span className="text-blue-300 text-sm">Learning AI/ML</span>
-            </div>
-            <div className="flex items-center gap-2 px-4 py-2 bg-purple-500/10 rounded-full border border-purple-500/20">
-              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
-              <span className="text-purple-300 text-sm">Cybersecurity</span>
-            </div>
-            <div className="flex items-center gap-2 px-4 py-2 bg-cyan-500/10 rounded-full border border-cyan-500/20">
-              <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
-              <span className="text-cyan-300 text-sm">Cloud Native</span>
-            </div>
-          </div>
-        </div>
-      </motion.div>
     </motion.div>
   )
 }
@@ -911,8 +872,10 @@ export default function ChatUI({ data }: ChatUIProps) {
       
       {/* Main content */}
       <div className="relative z-10 flex flex-col min-h-screen">
+        {/* Scale container - increase everything by 10% (origin-top) but exclude footer */}
+        <div className="transform scale-110 origin-top w-full">
         
-        <div className="flex-1 flex flex-col items-center justify-center w-full px-4 pt-2 pb-32">
+        <div className="flex-1 flex flex-col items-center justify-center w-full px-4 pt-2 pb-20">
         {/* Header Section - Only show when no tab is active */}
         {!activeTab && (
           <motion.div
@@ -970,7 +933,7 @@ export default function ChatUI({ data }: ChatUIProps) {
             </motion.div>
 
             {/* Search Input */}
-            <div className="w-full max-w-3xl mx-auto mb-4 px-2">
+            <div className="w-full max-w-3xl mx-auto mb-2 px-2">
               <AIInput 
                 onSubmit={handleSearch}
                 placeholder={searchResult ? "Search for something else..." : "Ask me about my skills, projects, or experience..."}
@@ -985,7 +948,7 @@ export default function ChatUI({ data }: ChatUIProps) {
             {renderContent()}
           </AnimatePresence>
         </div>
-
+       
         {/* Google-style Search Results */}
         {(currentQuery || searchResult || isSearching) && (
           <div className="w-full max-w-4xl mx-auto px-4 mb-8">
@@ -1064,15 +1027,19 @@ export default function ChatUI({ data }: ChatUIProps) {
         )}
 
         </div>
+        </div>
 
         {/* Navigation Buttons - Always visible and sticky at bottom */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="fixed bottom-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-t border-gray-700/50 p-4"
+          // outer fixed container is transparent so footer blends with page and buttons appear floating
+          className="fixed bottom-0 left-0 right-0 z-50 pointer-events-none"
         >
-          <div className="flex items-center justify-center flex-wrap gap-3 sm:gap-4 max-w-6xl mx-auto">
+          <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-center pointer-events-auto">
+            <div className="bg-gray-900/60 backdrop-blur-lg rounded-3xl shadow-xl px-3 py-2 border border-gray-700/40">
+              <div className="flex items-center justify-center flex-wrap gap-3 sm:gap-4">
           {navItems.map((item, index) => {
             const Icon = item.icon
             const isActive = activeTab === item.name
@@ -1101,6 +1068,8 @@ export default function ChatUI({ data }: ChatUIProps) {
               </motion.div>
             )
           })}
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
