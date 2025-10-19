@@ -26,17 +26,18 @@ const AboutMeContent = ({ data }: { data: PortfolioData }) => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
-    className="w-full px-6 flex items-center justify-center py-4"
+    className="w-full px-4 sm:px-6 flex items-center justify-center min-h-[85vh] py-6 sm:py-8"
   >
-    <div className="relative max-w-4xl mx-auto">
+    <div className="relative max-w-6xl mx-auto w-full">
       {/* Background glow effects */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-cyan-600/10 rounded-2xl blur-xl"></div>
       <div className="absolute -inset-1 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-600/20 rounded-2xl blur-2xl opacity-30"></div>
       
-      <div className="relative bg-gray-900/80 backdrop-blur-xl rounded-2xl p-6 border border-gray-700/50 shadow-xl">
-        <div className="grid lg:grid-cols-3 gap-8 items-start">
+      <div className="relative bg-gray-900/80 backdrop-blur-xl rounded-3xl p-6 sm:p-8 lg:p-10 border border-gray-700/50 shadow-xl">
+        <div className="grid lg:grid-cols-3 gap-6 lg:gap-10 items-center">
           {/* Profile Image Section */}
-          <div className="lg:col-span-1 flex flex-col items-center space-y-6">
+          <div className="lg:col-span-1 flex flex-col items-center space-y-4 lg:space-y-6 text-center"
+>
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -44,13 +45,13 @@ const AboutMeContent = ({ data }: { data: PortfolioData }) => (
               className="relative group"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity"></div>
-              <div className="relative w-48 h-48 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded-full flex items-center justify-center border-2 border-white/10 backdrop-blur-sm overflow-hidden">
+              <div className="relative w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded-full flex items-center justify-center border-2 border-white/10 backdrop-blur-sm overflow-hidden">
                 <Image
                   src="/profile.png"
                   alt={data.name}
-                  width={180}
-                  height={180}
-                  className="rounded-full object-cover"
+                  width={220}
+                  height={220}
+                  className="rounded-full object-cover w-full h-full"
                 />
               </div>
             </motion.div>
@@ -60,30 +61,30 @@ const AboutMeContent = ({ data }: { data: PortfolioData }) => (
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="grid grid-cols-2 gap-4 w-full"
+              className="grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-sm"
             >
-              <div className="text-center p-3 bg-blue-500/10 rounded-xl border border-blue-500/20">
-                <div className="text-xl font-bold text-blue-400">{data.projects.length}+</div>
-                <div className="text-xs text-gray-400">Projects</div>
+              <div className="text-center p-3 sm:p-4 bg-blue-500/10 rounded-xl border border-blue-500/20 hover:bg-blue-500/20 transition-all">
+                <div className="text-xl sm:text-2xl font-bold text-blue-400">{data.projects.length}+</div>
+                <div className="text-xs sm:text-sm text-gray-400">Projects</div>
               </div>
-              <div className="text-center p-3 bg-purple-500/10 rounded-xl border border-purple-500/20">
-                <div className="text-xl font-bold text-purple-400">{data.skills.length}+</div>
-                <div className="text-xs text-gray-400">Skills</div>
+              <div className="text-center p-3 sm:p-4 bg-purple-500/10 rounded-xl border border-purple-500/20 hover:bg-purple-500/20 transition-all">
+                <div className="text-xl sm:text-2xl font-bold text-purple-400">{data.skills.length}+</div>
+                <div className="text-xs sm:text-sm text-gray-400">Skills</div>
               </div>
             </motion.div>
           </div>
           
           {/* Content Section */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6 text-center lg:text-left">
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
             >
-              <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
                 About Me
               </h2>
-              <p className="text-gray-200 leading-relaxed text-lg mb-6">
+              <p className="text-gray-200 leading-relaxed text-base sm:text-lg lg:text-xl mb-4 sm:mb-6">
                 {data.bio}
               </p>
             </motion.div>
@@ -93,44 +94,44 @@ const AboutMeContent = ({ data }: { data: PortfolioData }) => (
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="grid md:grid-cols-2 gap-4"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4"
             >
-              <div className="p-4 bg-gradient-to-r from-blue-500/10 to-blue-600/10 rounded-xl border border-blue-500/20 hover:border-blue-400/40 transition-colors group">
+              <div className="p-4 sm:p-5 bg-gradient-to-r from-blue-500/10 to-blue-600/10 rounded-xl border border-blue-500/20 hover:border-blue-400/40 hover:bg-blue-500/15 transition-all group">
                 <div className="flex items-center space-x-3">
-                  <MapPin className="w-5 h-5 text-blue-400 group-hover:scale-110 transition-transform" />
+                  <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400 group-hover:scale-110 transition-transform" />
                   <div>
-                    <div className="text-white font-medium">Location</div>
-                    <div className="text-gray-300 text-sm">Based in India</div>
+                    <div className="text-white font-semibold text-sm sm:text-base">Location</div>
+                    <div className="text-gray-300 text-xs sm:text-sm">Based in India</div>
                   </div>
                 </div>
               </div>
               
-              <div className="p-4 bg-gradient-to-r from-purple-500/10 to-purple-600/10 rounded-xl border border-purple-500/20 hover:border-purple-400/40 transition-colors group">
+              <div className="p-4 sm:p-5 bg-gradient-to-r from-purple-500/10 to-purple-600/10 rounded-xl border border-purple-500/20 hover:border-purple-400/40 hover:bg-purple-500/15 transition-all group">
                 <div className="flex items-center space-x-3">
-                  <Code className="w-5 h-5 text-purple-400 group-hover:scale-110 transition-transform" />
+                  <Code className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400 group-hover:scale-110 transition-transform" />
                   <div>
-                    <div className="text-white font-medium">Role</div>
-                    <div className="text-gray-300 text-sm">Full Stack Developer</div>
+                    <div className="text-white font-semibold text-sm sm:text-base">Role</div>
+                    <div className="text-gray-300 text-xs sm:text-sm">Full Stack Developer</div>
                   </div>
                 </div>
               </div>
               
-              <div className="p-4 bg-gradient-to-r from-cyan-500/10 to-cyan-600/10 rounded-xl border border-cyan-500/20 hover:border-cyan-400/40 transition-colors group">
+              <div className="p-4 sm:p-5 bg-gradient-to-r from-cyan-500/10 to-cyan-600/10 rounded-xl border border-cyan-500/20 hover:border-cyan-400/40 hover:bg-cyan-500/15 transition-all group">
                 <div className="flex items-center space-x-3">
-                  <Star className="w-5 h-5 text-cyan-400 group-hover:scale-110 transition-transform" />
+                  <Star className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400 group-hover:scale-110 transition-transform" />
                   <div>
-                    <div className="text-white font-medium">Specialization</div>
-                    <div className="text-gray-300 text-sm">AI & Cybersecurity</div>
+                    <div className="text-white font-semibold text-sm sm:text-base">Specialization</div>
+                    <div className="text-gray-300 text-xs sm:text-sm">AI & Cybersecurity</div>
                   </div>
                 </div>
               </div>
               
-              <div className="p-4 bg-gradient-to-r from-green-500/10 to-green-600/10 rounded-xl border border-green-500/20 hover:border-green-400/40 transition-colors group">
+              <div className="p-4 sm:p-5 bg-gradient-to-r from-green-500/10 to-green-600/10 rounded-xl border border-green-500/20 hover:border-green-400/40 hover:bg-green-500/15 transition-all group">
                 <div className="flex items-center space-x-3">
-                  <Briefcase className="w-5 h-5 text-green-400 group-hover:scale-110 transition-transform" />
+                  <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 text-green-400 group-hover:scale-110 transition-transform" />
                   <div>
-                    <div className="text-white font-medium">Experience</div>
-                    <div className="text-gray-300 text-sm">2+ Years</div>
+                    <div className="text-white font-semibold text-sm sm:text-base">Experience</div>
+                    <div className="text-gray-300 text-xs sm:text-sm">2+ Years</div>
                   </div>
                 </div>
               </div>
@@ -678,28 +679,52 @@ const ContactContent = ({ data }: { data: PortfolioData }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="w-full px-6 py-4"
+      className="w-full px-4 sm:px-6 py-6 sm:py-8 min-h-[85vh] flex flex-col justify-center"
     >
-      <motion.h2 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent"
-      >
-        Let&apos;s Connect
-      </motion.h2>
-      
-      <div className="max-w-5xl mx-auto text-center">
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
+      <div className="max-w-6xl mx-auto">
+        <motion.h2 
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="text-gray-300 text-sm mb-4"
+          className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-center bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent"
         >
-          Ready to collaborate? Let&apos;s connect!
-        </motion.p>
+          Let&apos;s Connect & Build Together
+        </motion.h2>
+        
+        <div className="text-center mb-8 sm:mb-12">
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-gray-300 text-lg sm:text-xl lg:text-2xl mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed"
+          >
+            Ready to transform your vision into reality? Whether it&apos;s a cutting-edge web application, 
+            AI-powered solution, or cybersecurity project, I&apos;m here to bring innovation to life. 
+            Let&apos;s collaborate and create something extraordinary together.
+          </motion.p>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="flex flex-wrap justify-center gap-4 sm:gap-6 text-sm sm:text-base text-gray-400 mb-8 sm:mb-10"
+          >
+            <span className="flex items-center gap-2 px-3 py-2 bg-green-500/10 rounded-full border border-green-500/20">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              Available for projects
+            </span>
+            <span className="flex items-center gap-2 px-3 py-2 bg-blue-500/10 rounded-full border border-blue-500/20">
+              <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+              Open to collaborations
+            </span>
+            <span className="flex items-center gap-2 px-3 py-2 bg-purple-500/10 rounded-full border border-purple-500/20">
+              <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+              Quick to respond
+            </span>
+          </motion.div>
+        </div>
         
         {/* Contact Tiles Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6 mb-8 sm:mb-12">
           {contactMethods.map((method, index) => {
             const Icon = method.icon
             return (
@@ -710,40 +735,63 @@ const ContactContent = ({ data }: { data: PortfolioData }) => {
                 rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
+                transition={{ delay: 0.4 + index * 0.1 }}
+                whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
                 className="group relative"
               >
-                <div className={`relative bg-gray-900/80 backdrop-blur-xl rounded-xl p-3 border transition-all duration-300 hover:scale-105 ${
-                  method.color === 'blue' ? 'border-blue-500/30 hover:border-blue-400/50' :
-                  method.color === 'purple' ? 'border-purple-500/30 hover:border-purple-400/50' :
-                  'border-cyan-500/30 hover:border-cyan-400/50'
-                }`}>
+                <div className={`relative bg-gray-900/80 backdrop-blur-xl rounded-2xl p-6 sm:p-8 border transition-all duration-300 hover:scale-105 min-h-[160px] sm:min-h-[180px] flex flex-col items-center justify-center text-center ${
+                  method.color === 'blue' ? 'border-blue-500/30 hover:border-blue-400/50 hover:shadow-blue-500/20' :
+                  method.color === 'purple' ? 'border-purple-500/30 hover:border-purple-400/50 hover:shadow-purple-500/20' :
+                  method.color === 'cyan' ? 'border-cyan-500/30 hover:border-cyan-400/50 hover:shadow-cyan-500/20' :
+                  method.color === 'green' ? 'border-green-500/30 hover:border-green-400/50 hover:shadow-green-500/20' :
+                  'border-orange-500/30 hover:border-orange-400/50 hover:shadow-orange-500/20'
+                } hover:shadow-2xl`}>
+                  
+                  {/* Background glow effect */}
+                  <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 ${
+                    method.color === 'blue' ? 'bg-blue-500' :
+                    method.color === 'purple' ? 'bg-purple-500' :
+                    method.color === 'cyan' ? 'bg-cyan-500' :
+                    method.color === 'green' ? 'bg-green-500' :
+                    'bg-orange-500'
+                  }`}></div>
+                  
                   {/* Icon */}
-                  <div className={`w-8 h-8 mx-auto mb-2 rounded-lg flex items-center justify-center ${
-                    method.color === 'blue' ? 'bg-blue-500/10' :
-                    method.color === 'purple' ? 'bg-purple-500/10' :
-                    'bg-cyan-500/10'
+                  <div className={`w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${
+                    method.color === 'blue' ? 'bg-blue-500/10 group-hover:bg-blue-500/20' :
+                    method.color === 'purple' ? 'bg-purple-500/10 group-hover:bg-purple-500/20' :
+                    method.color === 'cyan' ? 'bg-cyan-500/10 group-hover:bg-cyan-500/20' :
+                    method.color === 'green' ? 'bg-green-500/10 group-hover:bg-green-500/20' :
+                    'bg-orange-500/10 group-hover:bg-orange-500/20'
                   }`}>
-                    <Icon className={`w-6 h-6 ${
-                      method.color === 'blue' ? 'text-blue-400' :
-                      method.color === 'purple' ? 'text-purple-400' :
-                      'text-cyan-400'
+                    <Icon className={`w-7 h-7 sm:w-8 sm:h-8 transition-colors duration-300 ${
+                      method.color === 'blue' ? 'text-blue-400 group-hover:text-blue-300' :
+                      method.color === 'purple' ? 'text-purple-400 group-hover:text-purple-300' :
+                      method.color === 'cyan' ? 'text-cyan-400 group-hover:text-cyan-300' :
+                      method.color === 'green' ? 'text-green-400 group-hover:text-green-300' :
+                      'text-orange-400 group-hover:text-orange-300'
                     }`} />
                   </div>
                   
                   {/* Label */}
-                  <h4 className="font-semibold text-white text-sm mb-1">
+                  <h4 className="font-bold text-white text-lg sm:text-xl mb-2 group-hover:text-white transition-colors">
                     {method.label}
                   </h4>
-                  <p className={`text-xs ${
-                    method.color === 'blue' ? 'text-blue-300' :
-                    method.color === 'purple' ? 'text-purple-300' :
-                    'text-cyan-300'
+                  <p className={`text-sm sm:text-base transition-colors duration-300 ${
+                    method.color === 'blue' ? 'text-blue-300/80 group-hover:text-blue-200' :
+                    method.color === 'purple' ? 'text-purple-300/80 group-hover:text-purple-200' :
+                    method.color === 'cyan' ? 'text-cyan-300/80 group-hover:text-cyan-200' :
+                    method.color === 'green' ? 'text-green-300/80 group-hover:text-green-200' :
+                    'text-orange-300/80 group-hover:text-orange-200'
                   }`}>
-                    Connect
+                    {method.description}
                   </p>
+                  
+                  {/* Hover indicator */}
+                  <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <ExternalLink className="w-4 h-4 text-gray-400" />
+                  </div>
                 </div>
               </motion.a>
             )
@@ -847,7 +895,7 @@ export default function ChatUI({ data }: ChatUIProps) {
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900"></div>
       
       {/* Main content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-[5vh] px-4 pt-1">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 pt-2">
         
         {/* Header Section - Only show when no tab is active */}
         {!activeTab && (
@@ -855,14 +903,14 @@ export default function ChatUI({ data }: ChatUIProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="flex flex-col items-center justify-start w-full max-w-2xl mx-auto"
+            className="flex flex-col items-center justify-center w-full max-w-3xl mx-auto py-8 sm:py-12"
           >
-            <div className="mt-6 text-center w-full">
+            <div className="text-center w-full">
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-xl md:text-2xl font-semibold text-white mb-4 drop-shadow-lg"
+                className="text-lg sm:text-xl lg:text-2xl font-semibold text-white mb-4 sm:mb-6 drop-shadow-lg"
               >
                 Hey Guys, I&apos;m <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent font-bold">{data.name}</span>
               </motion.p>
@@ -870,7 +918,7 @@ export default function ChatUI({ data }: ChatUIProps) {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-5xl md:text-6xl font-extrabold mb-6 relative"
+                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-6 sm:mb-8 relative"
               >
                 <span className="text-white drop-shadow-2xl">I cooked </span>
                 <span className="relative bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse">
@@ -882,11 +930,11 @@ export default function ChatUI({ data }: ChatUIProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
-                className="flex items-center justify-center gap-2 text-gray-300 mb-8"
+                className="flex items-center justify-center gap-2 text-gray-300 mb-6 sm:mb-8"
               >
-                <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-blue-500"></div>
-                <span className="text-sm uppercase tracking-widest font-medium">Portfolio 2024</span>
-                <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-purple-500"></div>
+                <div className="w-8 sm:w-12 h-0.5 bg-gradient-to-r from-transparent to-blue-500"></div>
+                <span className="text-xs sm:text-sm uppercase tracking-widest font-medium px-2">Portfolio 2024</span>
+                <div className="w-8 sm:w-12 h-0.5 bg-gradient-to-l from-transparent to-purple-500"></div>
               </motion.div>
             </div>
             {/* Profile Image */}
@@ -894,13 +942,14 @@ export default function ChatUI({ data }: ChatUIProps) {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
+              className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 mb-6 sm:mb-8"
             >
               <Image
                 src="/profile.png"
                 alt={data.name}
                 width={200}
                 height={200}
-                className="w-full h-full object-cover object-center"
+                className="w-full h-full object-cover object-center rounded-full"
               />
             </motion.div>
           </motion.div>
@@ -991,7 +1040,7 @@ export default function ChatUI({ data }: ChatUIProps) {
         )}
 
         {/* Google-style Search Input */}
-        <div className="w-full max-w-2xl mx-auto mb-8 mt-2">
+        <div className="w-full max-w-2xl mx-auto mb-6 sm:mb-8 px-2">
           <AIInput 
             onSubmit={handleSearch}
             placeholder={searchResult ? "Search for something else..." : "Ask me about my skills, projects, or experience..."}
@@ -1003,7 +1052,7 @@ export default function ChatUI({ data }: ChatUIProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="flex items-center justify-center flex-wrap gap-3 mb-8"
+          className="flex items-center justify-center flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8 px-2"
         >
           {navItems.map((item, index) => {
             const Icon = item.icon
@@ -1023,9 +1072,9 @@ export default function ChatUI({ data }: ChatUIProps) {
                   onClick={() => setActiveTab(activeTab === item.name ? null : item.name)}
                   className="group relative"
                 >
-                  <div className="flex items-center gap-2">
-                    <Icon size={16} className="transition-transform group-hover:scale-110" />
-                    <span className="text-sm font-medium">
+                  <div className="flex items-center gap-1 sm:gap-2 px-1 sm:px-2">
+                    <Icon size={14} className="sm:w-4 sm:h-4 transition-transform group-hover:scale-110" />
+                    <span className="text-xs sm:text-sm font-medium">
                       {item.name}
                     </span>
                   </div>
