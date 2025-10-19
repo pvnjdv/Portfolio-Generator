@@ -374,12 +374,12 @@ const SkillsContent = ({ data }: { data: PortfolioData }) => {
       <motion.h2 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-2xl font-bold mb-4 text-center bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent"
+        className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent"
       >
         Technical Skills & Expertise
       </motion.h2>
       
-      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-3">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
         {skillCategories.map((category, categoryIndex) => (
           <motion.div
             key={category.title}
@@ -388,7 +388,7 @@ const SkillsContent = ({ data }: { data: PortfolioData }) => {
             transition={{ delay: categoryIndex * 0.1 }}
             className="relative group"
           >
-            <div className={`relative bg-gray-900/80 backdrop-blur-xl rounded-xl p-3 border transition-all duration-300 hover:scale-105 ${
+            <div className={`relative bg-gray-900/80 backdrop-blur-xl rounded-xl p-6 border transition-all duration-300 hover:scale-105 min-h-[280px] ${
               category.color === 'blue' ? 'border-blue-500/30 hover:border-blue-400/50' :
               category.color === 'purple' ? 'border-purple-500/30 hover:border-purple-400/50' :
               category.color === 'cyan' ? 'border-cyan-500/30 hover:border-cyan-400/50' :
@@ -396,9 +396,9 @@ const SkillsContent = ({ data }: { data: PortfolioData }) => {
               'border-orange-500/30 hover:border-orange-400/50'
             }`}>
               {/* Header */}
-              <div className="flex items-center mb-2">
-                <span className="text-md mr-1">{category.icon}</span>
-                <h3 className={`text-xs font-bold ${
+              <div className="flex items-center mb-4">
+                <span className="text-lg mr-2">{category.icon}</span>
+                <h3 className={`text-sm font-bold ${
                   category.color === 'blue' ? 'text-blue-400' :
                   category.color === 'purple' ? 'text-purple-400' :
                   category.color === 'cyan' ? 'text-cyan-400' :
@@ -410,14 +410,14 @@ const SkillsContent = ({ data }: { data: PortfolioData }) => {
               </div>
               
               {/* Skills List */}
-              <div className="space-y-1">
-                {category.skills.slice(0, 5).map((skill, skillIndex) => (
+              <div className="space-y-2">
+                {category.skills.slice(0, 8).map((skill, skillIndex) => (
                   <motion.div
                     key={skill}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: (categoryIndex * 0.1) + (skillIndex * 0.05) }}
-                    className={`text-xs px-2 py-0.5 rounded border transition-all ${
+                    className={`text-sm px-3 py-2 rounded-lg border transition-all hover:scale-105 ${
                       category.color === 'blue' ? 'bg-blue-500/10 border-blue-500/20 text-blue-300' :
                       category.color === 'purple' ? 'bg-purple-500/10 border-purple-500/20 text-purple-300' :
                       category.color === 'cyan' ? 'bg-cyan-500/10 border-cyan-500/20 text-cyan-300' :
@@ -428,9 +428,9 @@ const SkillsContent = ({ data }: { data: PortfolioData }) => {
                     {skill}
                   </motion.div>
                 ))}
-                {category.skills.length > 5 && (
-                  <div className="text-xs text-gray-400 font-medium">
-                    +{category.skills.length - 5} more
+                {category.skills.length > 8 && (
+                  <div className="text-sm text-gray-400 font-medium">
+                    +{category.skills.length - 8} more
                   </div>
                 )}
               </div>
@@ -440,11 +440,11 @@ const SkillsContent = ({ data }: { data: PortfolioData }) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: (categoryIndex * 0.2) + 0.8 }}
-                className="mt-4 pt-4 border-t border-gray-700/50"
+                className="mt-6 pt-4 border-t border-gray-700/50"
               >
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-gray-400">{category.skills.length} Skills</span>
-                  <div className={`px-2 py-1 rounded-full text-xs font-medium ${
+                  <div className={`px-3 py-1 rounded-full text-xs font-medium ${
                     category.color === 'blue' ? 'bg-blue-500/20 text-blue-300' :
                     category.color === 'purple' ? 'bg-purple-500/20 text-purple-300' :
                     category.color === 'cyan' ? 'bg-cyan-500/20 text-cyan-300' :
@@ -464,14 +464,29 @@ const SkillsContent = ({ data }: { data: PortfolioData }) => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1 }}
-        className="mt-8 text-center"
+        className="mt-12 text-center"
       >
-        <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/50">
-          <h4 className="text-lg font-semibold text-gray-300 mb-4">Always Learning & Growing</h4>
-          <p className="text-gray-400 text-sm">
+        <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/50">
+          <h4 className="text-xl font-semibold text-gray-300 mb-6">Always Learning & Growing</h4>
+          <p className="text-gray-400 text-base leading-relaxed max-w-2xl mx-auto">
             Continuously expanding my skill set with emerging technologies and industry best practices.
-            Currently exploring advanced AI/ML techniques and modern cybersecurity frameworks.
+            Currently exploring advanced AI/ML techniques, modern cybersecurity frameworks, and cutting-edge
+            development methodologies to stay at the forefront of innovation.
           </p>
+          <div className="flex justify-center items-center gap-4 mt-6">
+            <div className="flex items-center gap-2 px-4 py-2 bg-blue-500/10 rounded-full border border-blue-500/20">
+              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+              <span className="text-blue-300 text-sm">Learning AI/ML</span>
+            </div>
+            <div className="flex items-center gap-2 px-4 py-2 bg-purple-500/10 rounded-full border border-purple-500/20">
+              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+              <span className="text-purple-300 text-sm">Cybersecurity</span>
+            </div>
+            <div className="flex items-center gap-2 px-4 py-2 bg-cyan-500/10 rounded-full border border-cyan-500/20">
+              <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+              <span className="text-cyan-300 text-sm">Cloud Native</span>
+            </div>
+          </div>
         </div>
       </motion.div>
     </motion.div>
@@ -516,12 +531,12 @@ const ExperienceContent = ({ data }: { data: PortfolioData }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="w-full px-6 py-4"
+      className="w-full px-6 py-8"
     >
       <motion.h2 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent"
+        className="text-3xl font-bold mb-10 text-center bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent"
       >
         Professional Journey
       </motion.h2>
@@ -529,17 +544,17 @@ const ExperienceContent = ({ data }: { data: PortfolioData }) => {
       {/* Simple Timeline Grid */}
       <div className="max-w-6xl mx-auto">
         {/* Horizontal Line */}
-        <div className="relative mb-4">
+        <div className="relative mb-8">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: "100%" }}
             transition={{ duration: 2, ease: "easeInOut" }}
-            className="h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full mx-auto"
+            className="h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full mx-auto"
           />
         </div>
 
         {/* Timeline Items Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {allItems.map((item, index) => (
             <motion.div
               key={item.uniqueKey}
@@ -548,13 +563,13 @@ const ExperienceContent = ({ data }: { data: PortfolioData }) => {
               transition={{ delay: index * 0.1 }}
               className="group"
             >
-              <div className={`relative bg-gray-900/90 backdrop-blur-xl rounded-xl p-3 border transition-all duration-300 hover:scale-105 ${
+              <div className={`relative bg-gray-900/90 backdrop-blur-xl rounded-xl p-6 border transition-all duration-300 hover:scale-105 min-h-[200px] ${
                 item.type === 'experience'
                   ? 'border-blue-500/30 hover:border-blue-400/50'
                   : 'border-purple-500/30 hover:border-purple-400/50'
               }`}>
                 {/* Date Badge */}
-                <div className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium mb-2 ${
+                <div className={`inline-block px-3 py-2 rounded-full text-sm font-medium mb-4 ${
                   item.type === 'experience'
                     ? 'bg-blue-500/20 text-blue-300'
                     : 'bg-purple-500/20 text-purple-300'
@@ -563,22 +578,22 @@ const ExperienceContent = ({ data }: { data: PortfolioData }) => {
                 </div>
 
                 {/* Content */}
-                <div className="space-y-2">
-                  <h3 className="text-sm font-bold text-white">
+                <div className="space-y-3">
+                  <h3 className="text-lg font-bold text-white">
                     {'position' in item ? item.position : item.degree}
                   </h3>
-                  <p className={`font-medium text-xs ${
+                  <p className={`font-medium text-sm ${
                     item.type === 'experience' ? 'text-blue-400' : 'text-purple-400'
                   }`}>
                     {'company' in item ? item.company : item.institution}
                   </p>
-                  <p className="text-gray-300 text-xs leading-relaxed line-clamp-2">
+                  <p className="text-gray-300 text-sm leading-relaxed">
                     {item.description}
                   </p>
                 </div>
 
                 {/* Type Indicator */}
-                <div className={`absolute top-2 right-2 w-2 h-2 rounded-full ${
+                <div className={`absolute top-3 right-3 w-3 h-3 rounded-full ${
                   item.type === 'experience' ? 'bg-blue-400' : 'bg-purple-400'
                 }`}></div>
               </div>
@@ -591,11 +606,11 @@ const ExperienceContent = ({ data }: { data: PortfolioData }) => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: allItems.length * 0.4 + 1 }}
-          className="text-center mt-8"
+          className="text-center mt-12"
         >
-          <div className="inline-flex items-center space-x-3 bg-gradient-to-r from-cyan-500/10 to-cyan-600/10 backdrop-blur-sm rounded-2xl px-6 py-3 border border-cyan-500/30">
-            <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-            <span className="text-cyan-400 font-medium">Currently building the future</span>
+          <div className="inline-flex items-center space-x-4 bg-gradient-to-r from-cyan-500/10 to-cyan-600/10 backdrop-blur-sm rounded-2xl px-8 py-4 border border-cyan-500/30">
+            <div className="w-4 h-4 bg-green-400 rounded-full animate-pulse"></div>
+            <span className="text-cyan-400 font-medium text-lg">Currently building the future</span>
           </div>
         </motion.div>
       </div>
@@ -952,6 +967,14 @@ export default function ChatUI({ data }: ChatUIProps) {
                 className="w-full h-full object-cover object-center rounded-full"
               />
             </motion.div>
+
+            {/* Search Input */}
+            <div className="w-full max-w-2xl mx-auto mb-6 sm:mb-8 px-2">
+              <AIInput 
+                onSubmit={handleSearch}
+                placeholder={searchResult ? "Search for something else..." : "Ask me about my skills, projects, or experience..."}
+              />
+            </div>
           </motion.div>
         )}
 
@@ -1039,15 +1062,7 @@ export default function ChatUI({ data }: ChatUIProps) {
           </div>
         )}
 
-        {/* Google-style Search Input */}
-        <div className="w-full max-w-2xl mx-auto mb-6 sm:mb-8 px-2">
-          <AIInput 
-            onSubmit={handleSearch}
-            placeholder={searchResult ? "Search for something else..." : "Ask me about my skills, projects, or experience..."}
-          />
-        </div>
-
-        {/* Navigation Buttons Below Input */}
+        {/* Navigation Buttons - Always visible */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
