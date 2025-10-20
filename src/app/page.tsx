@@ -113,11 +113,11 @@ const personalPortfolioData: PortfolioData = {
     }
   ],
   contact: {
-    email: "pradyumnavaidya@email.com", // Update with your actual email
-    phone: "+91 XXXXX XXXXX", // Update with your actual phone
-    linkedin: "https://linkedin.com/in/pradyumnavaidya", // Update if different
+    email: "admin@hackydaddy.xyz", // Update with your actual email
+    phone: "+91 9579348057", // Update with your actual phone
+    linkedin: "https://linkedin.com/hackydaddy", // Update if different
     github: "https://github.com/pvnjdv", // Your GitHub is correct
-    website: "https://pradyumnavaidya.dev", // Update with your actual domain
+    website: "https://HackyDaddy.xyz", // Update with your actual domain
     location: "Pune, Maharashtra, India"
   }
 }
