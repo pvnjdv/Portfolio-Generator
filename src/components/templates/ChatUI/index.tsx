@@ -889,13 +889,15 @@ export default function ChatUI({ data }: ChatUIProps) {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 xl:w-64 xl:h-64 mb-8 sm:mb-10"
             >
-              <Image
-                src="/profile.png"
-                alt={data.name}
-                width={200}
-                height={200}
-                className="w-full h-full object-cover object-center rounded-full"
-              />
+              {!username && (
+                <Image
+                  src="/profile.png"
+                  alt={data.name}
+                  width={200}
+                  height={200}
+                  className="w-full h-full object-cover object-center rounded-full"
+                />
+              )}
             </motion.div>
 
             {/* AI Input */}
