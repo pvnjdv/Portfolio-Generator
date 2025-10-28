@@ -321,7 +321,7 @@ export default function CreateForm({ isOpen, onClose }: CreateFormProps) {
               </label>
               <div className="grid gap-4">
                 {[
-                  { id: '1', name: 'ChatGPT Style', description: 'Interactive chat interface' },
+                  { id: '1', name: "Hackydaddy's Template", description: 'Interactive chat interface' },
                   { id: '2', name: 'Animated Scroll', description: 'Modern with smooth animations' },
                   { id: '3', name: 'Static Scroll', description: 'Clean and minimal' }
                 ].map((template) => (

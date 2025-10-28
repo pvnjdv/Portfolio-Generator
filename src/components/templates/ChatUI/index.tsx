@@ -1,11 +1,13 @@
 'use client'
 
 import { useState } from 'react'
+import { useParams } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { UserCircle, Code, Briefcase, Mail, Star, Github, ExternalLink, MapPin, Phone } from 'lucide-react'
 import { PortfolioData } from '@/lib/supabase'
 import { AIInput } from '@/components/ui/AIInput'
 import { GlassButton } from '@/components/ui/button'
+import AIResponseContainer from '@/components/ui/AIResponseContainer'
 import Image from 'next/image'
 
 interface ChatUIProps {
@@ -21,12 +23,12 @@ const navItems = [
 ]
 
 // About Me Component
-const AboutMeContent = ({ data }: { data: PortfolioData }) => (
+const AboutMeContent = ({ data, username }: { data: PortfolioData, username?: string }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
-    className="w-full px-4 sm:px-6 flex items-center justify-center min-h-[85vh] py-6 sm:py-8"
+    className="w-full px-4 sm:px-6 flex items-center justify-center min-h-[85vh] py-6 sm:py-8 pb-24 sm:pb-8"
   >
     <div className="relative max-w-6xl mx-auto w-full">
       {/* Background glow effects */}
@@ -46,13 +48,17 @@ const AboutMeContent = ({ data }: { data: PortfolioData }) => (
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity"></div>
               <div className="relative w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded-full flex items-center justify-center border-2 border-white/10 backdrop-blur-sm overflow-hidden">
-                <Image
-                  src="/profile.png"
-                  alt={data.name}
-                  width={220}
-                  height={220}
-                  className="rounded-full object-cover w-full h-full"
-                />
+                {!username ? (
+                  <Image
+                    src="/profile.png"
+                    alt={data.name}
+                    width={220}
+                    height={220}
+                    className="rounded-full object-cover w-full h-full"
+                  />
+                ) : (
+                  <UserCircle className="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 text-gray-300" />
+                )}
               </div>
             </motion.div>
             
@@ -655,7 +661,7 @@ const ContactContent = ({ data }: { data: PortfolioData }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="w-full px-4 sm:px-6 py-6 sm:py-8 min-h-[85vh] flex flex-col justify-center"
+      className="w-full px-4 sm:px-6 py-6 sm:py-8 pb-24 sm:pb-8 min-h-[85vh] flex flex-col justify-center"
     >
       <div className="max-w-6xl mx-auto">
         <motion.h2 
@@ -779,79 +785,27 @@ const ContactContent = ({ data }: { data: PortfolioData }) => {
 }
 
 export default function ChatUI({ data }: ChatUIProps) {
+  const params = useParams()
+  const username = params?.username as string
   const [activeTab, setActiveTab] = useState<string | null>(null)
   const [currentQuery, setCurrentQuery] = useState("")
-  const [searchResult, setSearchResult] = useState<string | null>(null)
-  const [isSearching, setIsSearching] = useState(false)
+  const [showAIResponse, setShowAIResponse] = useState(false)
 
-  const generateSearchResult = (query: string): string => {
-    const lowerQuery = query.toLowerCase()
-    
-    if (lowerQuery.includes('yourself') || lowerQuery.includes('about') || lowerQuery.includes('who')) {
-      return `## About ${data.name}\n\n${data.bio}\n\n**Current Focus:** AI & Cybersecurity enthusiast building innovative solutions through modern web technologies and secure systems.`
-    }
-    
-    if (lowerQuery.includes('skill')) {
-      return `## Skills & Technologies\n\n**Programming Languages:** ${data.skills.slice(0, 6).join(', ')}\n\n**Frameworks & Tools:** ${data.skills.slice(6).join(', ')}\n\n**Specializations:** Full-stack development, Machine Learning, Cybersecurity, Cloud Computing`
-    }
-    
-    if (lowerQuery.includes('project')) {
-      if (data.projects.length > 0) {
-        return `## Featured Projects\n\n${data.projects.map((project, index) => 
-          `**${index + 1}. ${project.title}**\n${project.description}\n\n🛠️ *Technologies:* ${project.technologies.join(', ')}\n🔗 [View Project](${project.projectUrl}) | 📁 [Source Code](${project.githubUrl})`
-        ).join('\n\n---\n\n')}`
-      }
-      return "## Current Projects\n\nWorking on exciting full-stack applications that showcase modern web development practices and cybersecurity implementations."
-    }
-    
-    if (lowerQuery.includes('experience') || lowerQuery.includes('work')) {
-      if (data.experience.length > 0) {
-        return `## Professional Experience\n\n${data.experience.map((exp, index) => 
-          `**${index + 1}. ${exp.position}** • ${exp.company}\n📅 *${exp.duration}*\n\n${exp.description}`
-        ).join('\n\n---\n\n')}`
-      }
-      return "## Professional Journey\n\nBuilding experience through innovative projects and collaborative development in modern tech stacks."
-    }
-    
-    if (lowerQuery.includes('education') || lowerQuery.includes('study')) {
-      if (data.education.length > 0) {
-        return `## Educational Background\n\n${data.education.map((edu, index) => 
-          `**${index + 1}. ${edu.degree}**\n🏫 ${edu.institution}\n📅 ${edu.duration}${edu.description ? `\n\n${edu.description}` : ''}`
-        ).join('\n\n---\n\n')}`
-      }
-      return "## Learning Philosophy\n\nCommitted to continuous learning and staying current with emerging technologies and industry best practices."
-    }
-    
-    if (lowerQuery.includes('contact') || lowerQuery.includes('reach') || lowerQuery.includes('hire')) {
-      return `## Get In Touch\n\nReady to collaborate on your next project or discuss opportunities.\n\n📧 **Email:** ${data.contact?.email || 'Available upon request'}\n💼 **LinkedIn:** ${data.contact?.linkedin || 'Connect with me'}\n🐙 **GitHub:** ${data.contact?.github || 'View my repositories'}\n\n💡 **Available for:** Full-time roles, freelance projects, consulting, and collaborative opportunities.`
-    }
-
-    // Default search suggestions
-    return `## Search Suggestions\n\nTry asking about:\n\n🔍 **"Tell me about yourself"** - Learn about my background\n🔍 **"What are your skills?"** - View technical expertise\n🔍 **"Show me your projects"** - Explore my work\n🔍 **"Your work experience"** - Professional journey\n🔍 **"How can I contact you?"** - Get in touch\n\nType any question to learn more about my portfolio!`
+  const handleAIQuery = (query: string) => {
+    setCurrentQuery(query)
+    setShowAIResponse(true)
+    setActiveTab(null) // Close any open tab when showing AI response
   }
 
-  const handleSearch = (query: string) => {
-    if (!query.trim()) {
-      setSearchResult(null)
-      setCurrentQuery("")
-      return
-    }
-
-    setCurrentQuery(query)
-    setIsSearching(true)
-    setSearchResult(null)
-
-    // Simulate search delay for better UX
-    setTimeout(() => {
-      setSearchResult(generateSearchResult(query))
-      setIsSearching(false)
-    }, 800 + Math.random() * 500)
+  const closeAIResponse = () => {
+    setShowAIResponse(false)
+    setCurrentQuery("")
   }
 
   const renderContent = () => {
     switch (activeTab) {
       case "Me":
-        return <AboutMeContent data={data} />
+        return <AboutMeContent data={data} username={username} />
       case "Projects":
         return <ProjectsContent data={data} />
       case "Skills":
@@ -875,7 +829,7 @@ export default function ChatUI({ data }: ChatUIProps) {
         {/* Scale container - increase everything by 10% (origin-top) but exclude footer */}
         <div className="transform scale-110 origin-top w-full">
         
-        <div className="flex-1 flex flex-col items-center justify-center w-full px-4 pt-2 pb-20">
+        <div className="flex-1 flex flex-col items-center justify-center w-full px-4 pt-2 pb-24 sm:pb-28 md:pb-32">
         {/* Header Section - Only show when no tab is active */}
         {!activeTab && (
           <motion.div
@@ -899,11 +853,23 @@ export default function ChatUI({ data }: ChatUIProps) {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-6 sm:mb-8 relative"
               >
-                <span className="text-white drop-shadow-2xl">I cooked </span>
-                <span className="relative bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse">
-                  HackyDaddy
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 via-purple-500/20 to-pink-500/20 blur-2xl -z-10 animate-pulse" />
-                </span>
+                {!username ? (
+                  <>
+                    <span className="text-white drop-shadow-2xl">I am </span>
+                    <span className="relative bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse">
+                      Hackydaddy
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 via-purple-500/20 to-pink-500/20 blur-2xl -z-10 animate-pulse" />
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-white drop-shadow-2xl">Welcome to </span>
+                    <span className="relative bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse">
+                      My Portfolio
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 via-purple-500/20 to-pink-500/20 blur-2xl -z-10 animate-pulse" />
+                    </span>
+                  </>
+                )}
               </motion.h1>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -912,7 +878,7 @@ export default function ChatUI({ data }: ChatUIProps) {
                 className="flex items-center justify-center gap-2 text-gray-300 mb-6 sm:mb-8"
               >
                 <div className="w-8 sm:w-12 h-0.5 bg-gradient-to-r from-transparent to-blue-500"></div>
-                <span className="text-xs sm:text-sm uppercase tracking-widest font-medium px-2">Portfolio 2024</span>
+                <span className="text-xs sm:text-sm uppercase tracking-widest font-medium px-2">Portfolio 2025</span>
                 <div className="w-8 sm:w-12 h-0.5 bg-gradient-to-l from-transparent to-purple-500"></div>
               </motion.div>
             </div>
@@ -932,11 +898,11 @@ export default function ChatUI({ data }: ChatUIProps) {
               />
             </motion.div>
 
-            {/* Search Input */}
+            {/* AI Input */}
             <div className="w-full max-w-3xl mx-auto mb-2 px-2">
               <AIInput 
-                onSubmit={handleSearch}
-                placeholder={searchResult ? "Search for something else..." : "Ask me about my skills, projects, or experience..."}
+                onSubmit={handleAIQuery}
+                placeholder="Ask me about my skills, projects, or experience..."
               />
             </div>
           </motion.div>
@@ -948,83 +914,18 @@ export default function ChatUI({ data }: ChatUIProps) {
             {renderContent()}
           </AnimatePresence>
         </div>
-       
-        {/* Google-style Search Results */}
-        {(currentQuery || searchResult || isSearching) && (
-          <div className="w-full max-w-4xl mx-auto px-4 mb-8">
-            {currentQuery && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mb-6"
-              >
-                <p className="text-gray-400 text-sm mb-2">
-                  Search results for: <span className="text-white font-medium">&quot;{currentQuery}&quot;</span>
-                </p>
-                <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent"></div>
-              </motion.div>
-            )}
-            
-            {isSearching ? (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="flex items-center justify-center py-12"
-              >
-                <div className="flex items-center space-x-3">
-                  <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
-                  <div className="w-3 h-3 bg-purple-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-                  <div className="w-3 h-3 bg-cyan-500 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-                </div>
-              </motion.div>
-            ) : searchResult && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/50"
-              >
-                <div className="prose prose-invert max-w-none">
-                  {searchResult.split('\n').map((line, index) => {
-                    if (line.startsWith('## ')) {
-                      return (
-                        <h2 key={index} className="text-2xl font-bold text-white mb-4 mt-6 first:mt-0">
-                          {line.replace('## ', '')}
-                        </h2>
-                      )
-                    }
-                    if (line.startsWith('**') && line.endsWith('**')) {
-                      return (
-                        <h3 key={index} className="text-lg font-semibold text-blue-400 mb-2 mt-4">
-                          {line.replace(/\*\*/g, '')}
-                        </h3>
-                      )
-                    }
-                    if (line.startsWith('🛠️') || line.startsWith('📅') || line.startsWith('🔗') || line.startsWith('📁') || line.startsWith('🏫') || line.startsWith('📧') || line.startsWith('💼') || line.startsWith('🐙') || line.startsWith('💡') || line.startsWith('🔍')) {
-                      return (
-                        <p key={index} className="text-gray-300 mb-2 text-sm italic">
-                          {line}
-                        </p>
-                      )
-                    }
-                    if (line === '---') {
-                      return (
-                        <div key={index} className="border-t border-gray-600 my-4"></div>
-                      )
-                    }
-                    if (line.trim()) {
-                      return (
-                        <p key={index} className="text-gray-200 mb-3 leading-relaxed">
-                          {line}
-                        </p>
-                      )
-                    }
-                    return <br key={index} />
-                  })}
-                </div>
-              </motion.div>
-            )}
-          </div>
-        )}
+
+        {/* AI Response Modal */}
+        <AnimatePresence>
+          {showAIResponse && currentQuery && (
+            <AIResponseContainer
+              data={data}
+              query={currentQuery}
+              onClose={closeAIResponse}
+              onNewQuery={handleAIQuery}
+            />
+          )}
+        </AnimatePresence>
 
         </div>
         </div>
