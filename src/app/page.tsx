@@ -101,14 +101,14 @@ const personalPortfolioData: PortfolioData = {
       id: "2",
       institution: "Jawahar Navodaya Vidyalaya, Dhule",
       degree: "Higher Secondary Certificate (HSC)",
-      duration: "Completed (72.2%)",
+      duration: "Completed",
       description: "Science stream with focus on Mathematics, Physics, and Chemistry. Participated in various academic competitions and extracurricular activities."
     },
     {
       id: "3",
       institution: "Jawahar Navodaya Vidyalaya, Dhule",
       degree: "Secondary School Certificate (SSC)",
-      duration: "Completed (84.5%)",
+      duration: "Completed",
       description: "Strong foundation in core subjects with excellent academic performance. Active participation in science fairs and technical exhibitions."
     }
   ],
