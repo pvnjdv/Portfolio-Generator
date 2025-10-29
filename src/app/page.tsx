@@ -21,35 +21,36 @@ const personalPortfolioData: PortfolioData = {
   projects: [
     {
       id: "1",
-      title: "Cybershield Club Platform",
-      description: "Founded and developed a comprehensive cybersecurity learning platform for students at AISSMS IOIT, increasing engagement by 100% through interactive workshops and collaborative learning.",
-      technologies: ["Python", "Flask", "JavaScript", "Bootstrap", "MySQL"],
-      projectUrl: "https://cybershield-platform.com",
-      githubUrl: "https://github.com/pvnjdv/cybershield-platform"
+      title: "Buddy",
+      description: "Buddy is a cross-platform, AI-powered productivity suite for developers and teams. It acts as a GitHub Copilot alternative, offering project management, code assistance, remote device access, and seamless integration across desktop, mobile, and web.",
+      technologies: ["Python", "FastAPI", "Typescript", "Bootstrap", "Flutter"],
+      githubUrl: "https://github.com/pvnjdv/Buddy"
     },
     {
       id: "2",
-      title: "AI-Powered Multimedia Platform",
-      description: "Full-stack multimedia platform with AI features including quick call/message responses. Enhanced UI/UX and integrated machine learning models for content optimization.",
-      technologies: ["React", "Node.js", "Python", "TensorFlow", "MongoDB", "Docker"],
-      projectUrl: "https://kootumb-platform.com",
-      githubUrl: "https://github.com/pvnjdv/multimedia-platform"
+      title: "Cybershield Club Platform",
+      description: "Founded and developed a comprehensive cybersecurity learning platform for students at AISSMS IOIT, increasing engagement by 100% through interactive workshops and collaborative learning.",
+      technologies: ["Python", "Flask", "JavaScript", "Bootstrap", "MySQL"],
     },
     {
       id: "3",
-      title: "Penetration Testing Toolkit",
-      description: "Comprehensive cybersecurity toolkit for vulnerability assessment and penetration testing. Includes automated scanning, reporting, and security protocol implementation.",
-      technologies: ["Python", "Kali Linux", "Bash", "SQL", "Docker"],
-      projectUrl: "https://pentest-toolkit.com",
-      githubUrl: "https://github.com/pvnjdv/pentest-toolkit"
+      title: "AI-Powered Portfolio Generator",
+      description: "An AI-powered portfolio platform showcasing Pavan Jadhav's professional work with 3 switchable templates, plus the ability for others to create their own dynamic portfolios instantly using AI resume parsing.",
+      technologies: ["React", "Next.js", "Typescript", "Grok-API", "Supabase"],
+      projectUrl: "https://portfolio.hackydaddy.xyz/",
+      githubUrl: "https://github.com/pvnjdv/Portfolio-Generator" 
     },
     {
       id: "4",
+      title: "Penetration Testing Toolkit",
+      description: "Comprehensive cybersecurity toolkit for vulnerability assessment and penetration testing. Includes automated scanning, reporting, and security protocol implementation.",
+      technologies: ["Python", "Kali Linux", "Bash", "SQL", "Docker"],
+    },
+    {
+      id: "5",
       title: "Data Science Analytics Dashboard",
       description: "Interactive dashboard for complex data analysis and visualization. Built predictive models and provided actionable insights from large datasets during internship at CodeClause.",
       technologies: ["Python", "Pandas", "Matplotlib", "Tableau", "PowerBI", "Jupyter"],
-      projectUrl: "https://analytics-dashboard.com",
-      githubUrl: "https://github.com/pvnjdv/data-analytics"
     }
   ],
   experience: [
@@ -63,26 +64,33 @@ const personalPortfolioData: PortfolioData = {
     {
       id: "2",
       company: "Cybershield, AISSMS IOIT",
-      position: "CEO & Founder",
-      duration: "Aug 2024 - Present",
-      description: "Founded a student cybersecurity club, increasing productivity and engagement by 100%. Led workshops and fostered a collaborative learning environment. Managed team operations and strategic planning for cybersecurity initiatives."
+      position: "Executive Chairperson",
+      duration: "Sept 2025 - Present",
+      description: "Leading the cybersecurity club, organizing workshops, and fostering a collaborative learning environment. Managing team operations and strategic planning for cybersecurity initiatives."
     },
     {
       id: "3",
+      company: "Cybershield, AISSMS IOIT",
+      position: "CEO & Founder",
+      duration: "Aug 2024 - Sept 2025 ",
+      description: "Founded a student cybersecurity club, increasing productivity and engagement by 100%. Led workshops and fostered a collaborative learning environment. Managed team operations and strategic planning for cybersecurity initiatives."
+    },
+    {
+      id: "4",
       company: "CodeClause Pvt Ltd",
       position: "Data Science Intern",
       duration: "Jan 2024 - Mar 2024",
       description: "Developed predictive models and derived actionable insights from complex datasets. Collaborated with cross-functional teams on data-driven decision-making. Worked with Python, machine learning algorithms, and data visualization tools."
     },
     {
-      id: "4",
+      id: "5",
       company: "Codesoft",
       position: "Python Programming Intern",
       duration: "Nov 2023 - Dec 2023",
       description: "Built and optimized Python-based applications ensuring clean and efficient code. Participated in debugging, performance tuning, and peer code reviews. Gained experience in software development best practices."
     },
     {
-      id: "5",
+      id: "6",
       company: "Technohacks Edutech Pvt Ltd",
       position: "Cybersecurity Intern",
       duration: "Oct 2023 - Nov 2023",
