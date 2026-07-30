@@ -23,7 +23,7 @@ else
 fi
 
 echo ""
-echo "🔧 Environment Setup Checklist:"
+echo "🔧 Environment Setup Checklists:"
 echo ""
 
 # Check if .env.local exists
