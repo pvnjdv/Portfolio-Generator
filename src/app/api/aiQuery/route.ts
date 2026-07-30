@@ -2,10 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import Groq from 'groq-sdk'
 import { PortfolioData } from '@/lib/supabase'
 
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-})
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
@@ -18,13 +14,17 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    const apiKey = process.env.GROQ_API_KEY
+
     // Check if Groq API key is configured
-    if (!process.env.GROQ_API_KEY || process.env.GROQ_API_KEY === 'your_groq_api_key') {
+    if (!apiKey || apiKey === 'your_groq_api_key') {
       return NextResponse.json(
         { error: 'AI service is not configured. Please check your API configuration.' },
         { status: 503 }
       )
     }
+
+    const groq = new Groq({ apiKey })
 
     // Create a comprehensive context from portfolio data
     const portfolioContext = `

@@ -1,14 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { getSupabaseClient } from '@/lib/supabase'
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ username: string }> }
 ) {
   try {
+    const client = getSupabaseClient()
+
+    if (!client) {
+      return NextResponse.json(
+        { error: 'Supabase is not configured' },
+        { status: 503 }
+      )
+    }
+
     const { username } = await params
 
-    const { data: portfolio, error } = await supabase
+    const { data: portfolio, error } = await client
       .from('portfolios')
       .select('*')
       .eq('username', username)

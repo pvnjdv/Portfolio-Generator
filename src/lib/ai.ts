@@ -1,10 +1,22 @@
 import Groq from 'groq-sdk'
 
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-})
+function getGroqClient() {
+  const apiKey = process.env.GROQ_API_KEY
+
+  if (!apiKey) {
+    return null
+  }
+
+  return new Groq({ apiKey })
+}
 
 export async function parseResumeWithAI(resumeText: string) {
+  const groq = getGroqClient()
+
+  if (!groq) {
+    throw new Error('GROQ_API_KEY is not configured')
+  }
+
   try {
     const completion = await groq.chat.completions.create({
       messages: [
@@ -88,6 +100,12 @@ export async function parseResumeWithAI(resumeText: string) {
 }
 
 export async function generatePortfolioContent(data: Record<string, unknown>) {
+  const groq = getGroqClient()
+
+  if (!groq) {
+    throw new Error('GROQ_API_KEY is not configured')
+  }
+
   try {
     const completion = await groq.chat.completions.create({
       messages: [

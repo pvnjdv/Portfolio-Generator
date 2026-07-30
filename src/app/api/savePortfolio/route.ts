@@ -1,13 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { getSupabaseClient } from '@/lib/supabase'
 
 export async function POST(request: NextRequest) {
   try {
+    const client = getSupabaseClient()
+
+    if (!client) {
+      return NextResponse.json(
+        { error: 'Supabase is not configured' },
+        { status: 503 }
+      )
+    }
+
     const body = await request.json()
     const { username, template, data } = body
 
     // Check if username already exists
-    const { data: existingUser } = await supabase
+    const { data: existingUser } = await client
       .from('portfolios')
       .select('username')
       .eq('username', username)
@@ -21,7 +30,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Insert new portfolio
-    const { data: portfolio, error } = await supabase
+    const { data: portfolio, error } = await client
       .from('portfolios')
       .insert({
         username,
